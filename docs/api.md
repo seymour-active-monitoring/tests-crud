@@ -36,6 +36,6 @@ The new test is returned in JSON format with a 201 response status code.
 
 #### 1.1.2.1. Example Response
 
-```json
-
+```text
+Test my-new-test created
 ```
