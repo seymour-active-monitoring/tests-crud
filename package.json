@@ -14,6 +14,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@aws-sdk/client-eventbridge": "^3.121.0",
     "aws-sdk": "^2.1169.0",
     "dotenv": "^16.0.1",
     "express": "^4.18.1",
