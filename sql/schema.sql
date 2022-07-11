@@ -10,7 +10,7 @@ CREATE TABLE tests (
   teardown text,
   status text NOT NULL,
   created_at TIMESTAMP NOT NULL DEFAULT NOW(),
-  updated_at TIMESTAMP NOT NULL
+  updated_at TIMESTAMP
 );
 
 CREATE TABLE notification_settings (
