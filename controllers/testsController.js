@@ -1,7 +1,9 @@
 const { LOCATION_TO_TEST_RUNNER } = require('../constants/aws/locationMappings');
 const { createRule, addTargetLambda } = require('../lib/aws/eventBridgeActions');
+const { addNewTest } = require('../lib/db/query');
 
 const createEventBridgeRule = async (location, test) => {
+  let targetResponse;
   try {
     const { RuleArn } = await createRule({
       name: `${test.title}-${location}`,
@@ -9,18 +11,23 @@ const createEventBridgeRule = async (location, test) => {
     });
     const ruleName = RuleArn.split('/').slice(-1)[0];
 
-    const targetResponse = await addTargetLambda({
+    targetResponse = await addTargetLambda({
       ruleName,
       lambdaArn: LOCATION_TO_TEST_RUNNER[location].arn,
       lambdaName: LOCATION_TO_TEST_RUNNER[location].title,
       inputJSON: JSON.stringify(test.http_request),
     });
 
-    return targetResponse;
+    try {
+      await addNewTest(ruleName, test);
+    } catch (e) {
+      throw new Error('Something went wrong with the database operation. Please try again');
+    }
   } catch (err) {
     console.log('Error: ', err);
     return err;
   }
+  return targetResponse;
 };
 
 const createTest = async (req, res) => {
