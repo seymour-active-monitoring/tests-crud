@@ -18,9 +18,9 @@ const createEventBridgeRule = async (location, test) => {
       inputJSON: JSON.stringify(test.http_request),
     });
 
-    const result = await addNewTest(ruleName, test);
-
-    if (!result) {
+    try {
+      await addNewTest(ruleName, test);
+    } catch (e) {
       throw new Error('Something went wrong with the database operation. Please try again');
     }
   } catch (err) {

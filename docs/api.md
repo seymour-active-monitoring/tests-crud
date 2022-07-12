@@ -13,19 +13,50 @@ Creates a synthetic test
 {
   "test": {
     "title": "My new test",
-    "locations": ["us-east-1"],
+    "locations": [
+      "us-east-1"
+    ],
     "minutesBetweenRuns": 60,
     "type": "API",
-    "http_request": {
-      "http_method": "GET",
-      "url": "https://mysite.com/api/users",
+    "httpRequest": {
+      "method": "GET",
+      "url": "https://example.com/api/endpoint",
       "headers": {},
       "body": {},
       "assertions": {
-        "status_code": 200,
-        "contains_properties": []
-      },
-    },
+        "statusCode": {
+          "comparison": "equals",
+          "target": 200
+        },
+        "responseTime": {
+          "comparison": "less_than",
+          "target": 925
+        },
+        "headers": [
+            {
+                "property": "Content-Type",
+                "comparison": "equals",
+                "target": "application json"
+            },
+            {
+                "property": "Connection",
+                "comparison": "equals",
+                "target": "keep-alive"
+            }
+        ],
+        "jsonBody": [
+            {
+                "property": "title",
+                "comparison": "equals",
+                "target": "Test board #2"
+            },
+            {
+                "property": "lists",
+                "comparison": "is_not_empty"
+            }
+        ]
+      }
+    }
   }
 }
 ```
