@@ -2,7 +2,8 @@ const { LOCATION_TO_PRE_PROCESSOR } = require('../constants/aws/locationMappings
 const { createRule, addTargetLambda } = require('../lib/aws/eventBridgeActions');
 const { addNewTest, getTests } = require('../lib/db/query');
 
-const createEventBridgeRule = async (test) => {
+const createEventBridgeRule = async (reqBody) => {
+  const { test } = reqBody;
   let targetResponse;
   try {
     const { RuleArn } = await createRule({
@@ -15,11 +16,11 @@ const createEventBridgeRule = async (test) => {
       ruleName,
       lambdaArn: LOCATION_TO_PRE_PROCESSOR['pre-processing'].arn,
       lambdaName: LOCATION_TO_PRE_PROCESSOR['pre-processing'].title,
-      inputJSON: JSON.stringify(test),
+      inputJSON: JSON.stringify(reqBody),
     });
 
     try {
-      await addNewTest(ruleName, test);
+      await addNewTest(ruleName, RuleArn, test);
     } catch (e) {
       throw new Error('Something went wrong with the database operation. Please try again');
     }
@@ -32,9 +33,8 @@ const createEventBridgeRule = async (test) => {
 
 const createTest = async (req, res) => {
   try {
-    const { test } = req.body;
-    createEventBridgeRule(test);
-    res.status(201).send(`Test ${test.title} created`);
+    createEventBridgeRule(req.body);
+    res.status(201).send(`Test ${req.body.test.title} created`);
   } catch (err) {
     console.log('Error: ', err);
   }
