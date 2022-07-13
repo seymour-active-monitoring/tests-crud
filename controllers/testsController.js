@@ -1,6 +1,6 @@
 const { LOCATION_TO_TEST_RUNNER } = require('../constants/aws/locationMappings');
 const { createRule, addTargetLambda } = require('../lib/aws/eventBridgeActions');
-const { addNewTest } = require('../lib/db/query');
+const { addNewTest, getTests } = require('../lib/db/query');
 
 const createEventBridgeRule = async (test) => {
   let targetResponse;
@@ -40,4 +40,14 @@ const createTest = async (req, res) => {
   }
 };
 
+const getScheduledTests = async (req, res) => {
+  try {
+    const data = await getTests();
+    res.json(data);
+  } catch (err) {
+    console.log('Error: ', err);
+  }
+};
+
 exports.createTest = createTest;
+exports.getScheduledTests = getScheduledTests;
