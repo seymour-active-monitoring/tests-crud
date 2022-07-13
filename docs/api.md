@@ -25,7 +25,7 @@ Creates a synthetic test
       "body": {},
       "assertions": {
         "statusCode": {
-          "comparison": "equals",
+          "comparison": "equal_to",
           "target": 200
         },
         "responseTime": {
@@ -35,19 +35,19 @@ Creates a synthetic test
         "headers": [
             {
                 "property": "Content-Type",
-                "comparison": "equals",
+                "comparison": "equal_to",
                 "target": "application json"
             },
             {
                 "property": "Connection",
-                "comparison": "equals",
+                "comparison": "equal_to",
                 "target": "keep-alive"
             }
         ],
         "jsonBody": [
             {
                 "property": "title",
-                "comparison": "equals",
+                "comparison": "equal_to",
                 "target": "Test board #2"
             },
             {

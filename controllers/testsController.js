@@ -19,7 +19,7 @@ const createEventBridgeRule = async (test) => {
     });
 
     try {
-      await addNewTest(ruleName, test);
+      await addNewTest(ruleName, RuleArn, test);
     } catch (e) {
       throw new Error('Something went wrong with the database operation. Please try again');
     }
