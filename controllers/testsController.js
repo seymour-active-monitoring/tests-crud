@@ -15,7 +15,7 @@ const createEventBridgeRule = async (test) => {
       ruleName,
       lambdaArn: LOCATION_TO_PRE_PROCESSOR['pre-processing'].arn,
       lambdaName: LOCATION_TO_PRE_PROCESSOR['pre-processing'].title,
-      inputJSON: JSON.stringify(test.httpRequest),
+      inputJSON: JSON.stringify(test),
     });
 
     try {
