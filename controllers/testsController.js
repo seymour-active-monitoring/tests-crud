@@ -1,6 +1,6 @@
 const { LOCATION_TO_PRE_PROCESSOR } = require('../constants/aws/locationMappings');
 const { createRule, addTargetLambda } = require('../lib/aws/eventBridgeActions');
-const { addNewTest, getTests } = require('../lib/db/query');
+const { addNewTest, getTests, getTestDB } = require('../lib/db/query');
 
 const createEventBridgeRule = async (test) => {
   let targetResponse;
@@ -49,5 +49,16 @@ const getScheduledTests = async (req, res) => {
   }
 };
 
+const getTest = async (req, res) => {
+  try {
+    const testId = req.params.id;
+    const data = await getTestDB(testId);
+    res.json(data);
+  } catch (err) {
+    console.log('Error: ', err);
+  }
+};
+
 exports.createTest = createTest;
 exports.getScheduledTests = getScheduledTests;
+exports.getTest = getTest;
