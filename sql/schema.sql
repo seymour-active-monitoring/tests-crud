@@ -9,6 +9,7 @@ CREATE TABLE tests (
   query_params JSONB,
   teardown text,
   status text NOT NULL,
+  eb_rule_arn text,
   created_at TIMESTAMP NOT NULL DEFAULT NOW(),
   updated_at TIMESTAMP
 );
@@ -110,8 +111,6 @@ CREATE TABLE assertion_results (
   pass BOOLEAN NOT NULL
 ); 
 
-
-
 -- CREATE TABLE slack_alerts (
 --   id serial PRIMARY KEY,
 --   webhook text NOT NULL,
@@ -120,6 +119,3 @@ CREATE TABLE assertion_results (
 --     REFERENCES notification_settings (id)
 --     ON DELETE CASCADE
 -- );
-
-
-
