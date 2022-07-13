@@ -1,6 +1,6 @@
-INSERT INTO tests (id, name, run_frequency_mins, method, url, headers, payload, status)
-  VALUES (100000, 'first_get_test', 60, 'GET', 'https://trellific.corkboard.dev/api/boards','{}','{}', 'RUNNING'),
-         (100001,'first_post_test', 60, 'POST', 'https://trellific.corkboard.dev/api/boards', '{"Content-Type": "application/json"}', '{"board":{"title":"post-test-board"}}', 'RUNNING');
+INSERT INTO tests (id, name, run_frequency_mins, method, url, headers, payload, status, eb_rule_arn)
+  VALUES (100000, 'first_get_test', 60, 'GET', 'https://trellific.corkboard.dev/api/boards','{}','{}', 'RUNNING', 'arn:imfake'),
+         (100001,'first_post_test', 60, 'POST', 'https://trellific.corkboard.dev/api/boards', '{"Content-Type": "application/json"}', '{"board":{"title":"post-test-board"}}', 'RUNNING', 'arn:imfake');
 
 INSERT INTO notification_settings (id, alerts_on_recovery, alerts_on_failure)
   VALUES (100000, false, true),
