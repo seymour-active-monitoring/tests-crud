@@ -70,3 +70,7 @@ The new test is returned in JSON format with a 201 response status code.
 ```text
 Test my-new-test created
 ```
+
+#### 1.1.3 Forwarded Payload
+
+The payload received from the client (refer to 1.1.1) is forwarded to EventBridge for use as the "Input to Target" JSON without modification.
