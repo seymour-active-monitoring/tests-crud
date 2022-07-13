@@ -19,7 +19,23 @@ INSERT INTO comparison_types (id, name, symbol)
          (100001, 'greather_than', '>'),
          (100002, 'less_than', '<'),
          (100003, 'greater_than_or_equal_to', '>='),
-         (100004, 'less_than_or_equal_to', '<=');
+         (100004, 'less_than_or_equal_to', '<='),
+         (1, 'equal_to', '='),
+         (2, 'not_equal_to', '!='),
+         (3, 'has_key', null),
+         (4, 'not_has_key', null),
+         (5, 'has_value', null),
+         (6, 'not_has_value', null),
+         (7, 'is_empty', null),
+         (8, 'is_not_empty', null),
+         (9, 'greather_than', '>'),
+         (10, 'less_than', '<'),
+         (11, 'greater_than_or_equal_to', '>='),
+         (12, 'less_than_or_equal_to', '<='),
+         (13, 'contains', null),
+         (14, 'not_contains', null),
+         (15, 'is_null', null),
+         (16, 'is_not_null', null);
 
 INSERT INTO assertions (id, test_id, type, property, comparison_type_id, expected_value)
   VALUES (100000, 100000, 'status_code', null, 100000, '200'),

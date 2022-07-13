@@ -79,7 +79,7 @@ CREATE TABLE tests_regions (
 CREATE TABLE comparison_types (
   id serial PRIMARY KEY,
   name text NOT NULL,
-  symbol text NOT NULL
+  symbol text
 ); 
 
 CREATE TABLE assertions (
