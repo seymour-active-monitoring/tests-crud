@@ -1,4 +1,4 @@
-const { LOCATION_TO_TEST_RUNNER } = require('../constants/aws/locationMappings');
+const { LOCATION_TO_PRE_PROCESSOR } = require('../constants/aws/locationMappings');
 const { createRule, addTargetLambda } = require('../lib/aws/eventBridgeActions');
 const { addNewTest } = require('../lib/db/query');
 
@@ -13,8 +13,8 @@ const createEventBridgeRule = async (test) => {
 
     targetResponse = await addTargetLambda({
       ruleName,
-      lambdaArn: LOCATION_TO_TEST_RUNNER['pre-processing'].arn,
-      lambdaName: LOCATION_TO_TEST_RUNNER['pre-processing'].title,
+      lambdaArn: LOCATION_TO_PRE_PROCESSOR['pre-processing'].arn,
+      lambdaName: LOCATION_TO_PRE_PROCESSOR['pre-processing'].title,
       inputJSON: JSON.stringify(test.httpRequest),
     });
 
