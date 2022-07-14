@@ -7,7 +7,7 @@ const createEventBridgeRule = async (reqBody) => {
   let targetResponse;
   try {
     const { RuleArn } = await createRule({
-      name: `${test.title}-test`,
+      name: `${test.title}`,
       minutesBetweenRuns: test.minutesBetweenRuns,
     });
     const ruleName = RuleArn.split('/').slice(-1)[0];
