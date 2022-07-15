@@ -1,3 +1,9 @@
+CREATE TABLE http_methods (
+  id serial PRIMARY KEY,
+  name text NOT NULL UNIQUE,
+  supported BOOLEAN
+);
+
 CREATE TABLE tests (
   id serial PRIMARY KEY,
   name text NOT NULL UNIQUE,
@@ -112,12 +118,6 @@ CREATE TABLE assertion_results (
   actual_value text NOT NULL,
   pass BOOLEAN NOT NULL
 ); 
-
-CREATE TABLE http_methods (
-  id serial PRIMARY KEY,
-  name text NOT NULL UNIQUE,
-  supported BOOLEAN
-);
 
 -- CREATE TABLE slack_alerts (
 --   id serial PRIMARY KEY,

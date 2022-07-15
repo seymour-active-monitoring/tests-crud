@@ -4,7 +4,7 @@ INSERT INTO http_methods (id, name, supported)
          (3, 'PUT', true),
          (4, 'DELETE', true),
          (5, 'PATCH', false),
-         (6, 'HEAD', false)
+         (6, 'HEAD', false);
 
 INSERT INTO tests (id, name, run_frequency_mins, method_id, url, headers, payload, status, eb_rule_arn)
   VALUES (100000, 'first_get_test', 60, 1, 'https://trellific.corkboard.dev/api/boards','{}','{}', 'RUNNING', 'arn:imfake'),
