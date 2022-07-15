@@ -1,10 +1,11 @@
 const { LOCATION_TO_PRE_PROCESSOR } = require('../constants/aws/locationMappings');
-const { createRule, addTargetLambda } = require('../lib/aws/eventBridgeActions');
+const { createRule, addTargetLambda, addLambdaPermissions } = require('../lib/aws/eventBridgeActions');
 const { addNewTest, getTests, getTestDB } = require('../lib/db/query');
 
 const createEventBridgeRule = async (reqBody) => {
   const { test } = reqBody;
   let targetResponse;
+  let permissionsResponse;
   try {
     const { RuleArn } = await createRule({
       name: `${test.title}`,
@@ -19,6 +20,11 @@ const createEventBridgeRule = async (reqBody) => {
       inputJSON: JSON.stringify(reqBody),
     });
 
+    permissionsResponse = await addLambdaPermissions({
+      lambdaArn: LOCATION_TO_PRE_PROCESSOR['pre-processing'].arn,
+      ruleArn: RuleArn,
+    });
+
     try {
       await addNewTest(ruleName, RuleArn, test);
     } catch (e) {
@@ -28,7 +34,7 @@ const createEventBridgeRule = async (reqBody) => {
     console.log('Error: ', err);
     return err;
   }
-  return targetResponse;
+  return { targetResponse, permissionsResponse };
 };
 
 const createTest = async (req, res) => {
