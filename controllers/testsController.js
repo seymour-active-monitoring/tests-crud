@@ -1,3 +1,4 @@
+const { validationResult } = require('express-validator');
 const { LOCATION_TO_PRE_PROCESSOR } = require('../constants/aws/locationMappings');
 const { createRule, addTargetLambda, addLambdaPermissions } = require('../lib/aws/eventBridgeActions');
 const { addNewTest, getTests, getTestDB } = require('../lib/db/query');
@@ -38,11 +39,16 @@ const createEventBridgeRule = async (reqBody) => {
 };
 
 const createTest = async (req, res) => {
-  try {
-    createEventBridgeRule(req.body);
-    res.status(201).send(`Test ${req.body.test.title} created`);
-  } catch (err) {
-    console.log('Error: ', err);
+  const errors = validationResult(req);
+  if (errors.isEmpty()) {
+    try {
+      createEventBridgeRule(req.body);
+      res.status(201).send(`Test ${req.body.test.title} created`);
+    } catch (err) {
+      console.log('Error: ', err);
+    }
+  } else {
+    res.status(400).json({ errors: errors.array() });
   }
 };
 
