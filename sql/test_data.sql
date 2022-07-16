@@ -48,8 +48,30 @@ INSERT INTO assertions (id, test_id, type, property, comparison_type_id, expecte
 INSERT INTO regions (id, display_name, aws_name, flag_url)
   VALUES (100000, 'Virginia', 'us-east-1', 'https://img.icons8.com/office/344/usa.png'),
          (100001, 'Montreal', 'ca-central-1', 'https://img.icons8.com/office/344/canada.png'),
-         (100002, 'Stockholm', 'eu-north-1', 'https://img.icons8.com/offices/344/sweden.png');
-
+         (100002, 'Stockholm', 'eu-north-1', 'https://img.icons8.com/offices/344/sweden.png'),
+         (1,'N. Virginia', 'us-east-1','https://countryflagsapi.com/png/usa'),
+         (2,'Ohio', 'us-east-2','https://countryflagsapi.com/png/usa'),
+         (3,'N. California', 'us-west-1','https://countryflagsapi.com/png/usa'),
+         (4,'Oregon', 'us-west-2','https://countryflagsapi.com/png/usa'),
+         (5,'Montreal', 'ca-central-1','https://countryflagsapi.com/png/canada'),
+         (6,'São Paulo', 'sa-east-1','https://countryflagsapi.com/png/brazil'),
+         (7,'Stockholm', 'eu-north-1','https://countryflagsapi.com/png/sweden'),
+         (8,'Paris', 'eu-west-3','https://countryflagsapi.com/png/france'),
+         (9,'London', 'eu-west-2','https://countryflagsapi.com/png/gbr'),
+         (10,'Ireland', 'eu-west-1','https://countryflagsapi.com/png/ireland'),
+         (11,'Frankfurt', 'eu-central-1','https://countryflagsapi.com/png/germany'),
+         (12,'Milan', 'eu-south-1','https://countryflagsapi.com/png/italy'),
+         (13,'Bahrain', 'me-south-1','https://countryflagsapi.com/png/bahrain'),
+         (14,'Cape Town', 'af-south-1','https://countryflagsapi.com/png/zaf'),
+         (15,'Singapore', 'ap-southeast-1','https://countryflagsapi.com/png/singapore'),
+         (16,'Tokyo', 'ap-northeast-1','https://countryflagsapi.com/png/japan'),
+         (17,'Osaka', 'ap-northeast-3','https://countryflagsapi.com/png/japan'),
+         (18,'Hong Kong', 'ap-east-1','https://countryflagsapi.com/png/china'),
+         (19,'Sydney', 'ap-southeast-2','https://countryflagsapi.com/png/australia'),
+         (20,'Jakarta', 'ap-southeast-3','https://countryflagsapi.com/png/indonesia'),
+         (21,'Seoul', 'ap-northeast2','https://countryflagsapi.com/png/kor'),
+         (22,'Mumbai', 'ap-south-1','https://countryflagsapi.com/png/india');
+         
 INSERT INTO tests_regions (test_id, region_id)
   VALUES (100000, 100000),
          (100000, 100001),
