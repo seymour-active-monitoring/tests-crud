@@ -1,5 +1,5 @@
 const { validationResult } = require('express-validator');
-const { LOCATION_TO_PRE_PROCESSOR } = require('../constants/aws/locationMappings');
+const { RULE_TARGET_INFO } = require('../constants/aws/locationMappings');
 const { createRule, addTargetLambda, addLambdaPermissions } = require('../lib/aws/eventBridgeActions');
 const { addNewTest, getTests, getTestDB } = require('../lib/db/query');
 
@@ -16,13 +16,13 @@ const createEventBridgeRule = async (reqBody) => {
 
     targetResponse = await addTargetLambda({
       ruleName,
-      lambdaArn: LOCATION_TO_PRE_PROCESSOR['pre-processing'].arn,
-      lambdaName: LOCATION_TO_PRE_PROCESSOR['pre-processing'].title,
+      lambdaArn: RULE_TARGET_INFO['test-route-packager'].arn,
+      lambdaName: RULE_TARGET_INFO['test-route-packager'].title,
       inputJSON: JSON.stringify(reqBody),
     });
 
     permissionsResponse = await addLambdaPermissions({
-      lambdaArn: LOCATION_TO_PRE_PROCESSOR['pre-processing'].arn,
+      lambdaArn: RULE_TARGET_INFO['test-route-packager'].arn,
       ruleArn: RuleArn,
     });
 
