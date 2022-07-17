@@ -1,7 +1,8 @@
 const { validationResult } = require('express-validator');
 const { LOCATION_TO_PRE_PROCESSOR } = require('../constants/aws/locationMappings');
 const { createRule, addTargetLambda, addLambdaPermissions } = require('../lib/aws/eventBridgeActions');
-const { addNewTest, getTests, getTestDB } = require('../lib/db/query');
+// const { addNewTest, getTests, getTestDB } = require('../lib/db/query');
+const DB = require('../lib/db/query');
 
 const createEventBridgeRule = async (reqBody) => {
   const { test } = reqBody;
@@ -27,7 +28,7 @@ const createEventBridgeRule = async (reqBody) => {
     });
 
     try {
-      await addNewTest(ruleName, RuleArn, test);
+      await DB.addNewTest(ruleName, RuleArn, test);
     } catch (e) {
       throw new Error('Something went wrong with the database operation. Please try again');
     }
@@ -54,7 +55,7 @@ const createTest = async (req, res) => {
 
 const getScheduledTests = async (req, res) => {
   try {
-    const data = await getTests();
+    const data = await DB.getTests();
     res.json(data);
   } catch (err) {
     console.log('Error: ', err);
@@ -64,7 +65,7 @@ const getScheduledTests = async (req, res) => {
 const getTest = async (req, res) => {
   try {
     const testId = req.params.id;
-    const data = await getTestDB(testId);
+    const data = await DB.getTest(testId);
     res.json(data);
   } catch (err) {
     console.log('Error: ', err);
