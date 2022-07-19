@@ -59,7 +59,17 @@ Creates a synthetic test
             }
         ]
       }
-    }
+    },
+    "notifications": [
+      {
+        "type": "slack",
+        "address": "http://..."
+      },
+      {
+        "type": "email",
+        "address": "name@domain.com"
+      }
+    ],
   }
 }
 ```
