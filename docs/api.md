@@ -196,3 +196,89 @@ The tests runs are returned in JSON format with a 200 response status code.
 #### 1.3.3 Forwarded Payload
 
 none
+
+## 1.3. GET /api/sideload
+
+Get sideload data 
+
+### 1.3.1. Expected Payload
+
+no payload
+
+### 1.3.2. Successful Response
+
+The tests runs are returned in JSON format with a 200 response status code.
+
+#### 1.3.2.1. Example Response
+
+```json
+{
+  "comparisonTypes": [
+    {
+      "id": 1,
+      "name": "equal_to",
+      "display_name": "Equal to",
+      "symbol": "=",
+      "supported": true
+    },
+    {
+      "id": 2,
+      "name": "not_equal_to",
+      "display_name": "Not equal to",
+      "symbol": "!=",
+      "supported": true
+    },
+  ],
+  "regions": [
+    {
+      "id": 1,
+      "name": "us_east_1",
+      "display_name": "N. Virginia",
+      "aws_name": "us-east-1",
+      "flag_url": "https://countryflagsapi.com/png/usa",
+      "supported": true
+    },
+    {
+      "id": 2,
+      "name": "us_east_2",
+      "display_name": "Ohio",
+      "aws_name": "us-east-2",
+      "flag_url": "https://countryflagsapi.com/png/usa",
+      "supported": false
+    },
+  ],
+  "httpsMethod": [
+    {
+      "id": 1,
+      "name": "get",
+      "display_name": "GET",
+      "supported": true
+    },
+    {
+      "id": 2,
+      "name": "post",
+      "display_name": "POST",
+      "supported": true
+    },
+  ],
+  "assertionTypesResult": [
+    {
+      "id": 1,
+      "name": "response_time",
+      "display_name": "Response time",
+      "supported": true
+    },
+    {
+      "id": 2,
+      "name": "status_code",
+      "display_name": "Status code",
+      "supported": true
+    },
+  ]
+}
+
+```
+
+#### 1.3.3 Forwarded Payload
+
+none
