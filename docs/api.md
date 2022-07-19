@@ -2,8 +2,9 @@
 
 - [1. API Documentation](#1-api-documentation)
   - [1.1. POST /api/tests](#14-post-apitests)
-  - [1.2. GET /api/tests](#79-post-apitests)
-  - [1.3. GET /tests/:id](#138-post-apitests)
+  - [1.2. GET /api/tests](#79-get-apitests)
+  - [1.3. GET /api/tests/:id](#138-get-apitest)
+	- [1.4. GET /api/sideload](#201-get-apitest)
 
 ## 1.1. POST /api/tests
 
@@ -137,7 +138,7 @@ The scheduled tests are returned in JSON format with a 200 response status code.
 
 none
 
-## 1.3. GET /api/tests
+## 1.3. GET /api/test/:id
 
 Get all runs for a single test
 
@@ -197,19 +198,19 @@ The tests runs are returned in JSON format with a 200 response status code.
 
 none
 
-## 1.3. GET /api/sideload
+## 1.4.0 GET /api/sideload
 
 Get sideload data 
 
-### 1.3.1. Expected Payload
+### 1.4.1. Expected Payload
 
 no payload
 
-### 1.3.2. Successful Response
+### 1.4.2. Successful Response
 
 The tests runs are returned in JSON format with a 200 response status code.
 
-#### 1.3.2.1. Example Response
+#### 1.4.2.1. Example Response
 
 ```json
 {
@@ -279,6 +280,6 @@ The tests runs are returned in JSON format with a 200 response status code.
 
 ```
 
-#### 1.3.3 Forwarded Payload
+#### 1.4.3 Forwarded Payload
 
 none
