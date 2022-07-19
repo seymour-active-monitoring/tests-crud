@@ -1,8 +1,16 @@
+CREATE TABLE http_methods (
+  id serial PRIMARY KEY,
+  name text NOT NULL UNIQUE,
+  supported BOOLEAN
+);
+
 CREATE TABLE tests (
   id serial PRIMARY KEY,
   name text NOT NULL UNIQUE,
   run_frequency_mins INT NOT NULL,
-  method text NOT NULL,
+  method_id INT 
+    NOT NULL
+    REFERENCES http_methods (id),
   url text NOT NULL,
   headers JSONB,
   payload JSONB,

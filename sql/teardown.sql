@@ -17,3 +17,5 @@ DROP TABLE alerts;
 DROP TABLE notification_settings;
 
 DROP TABLE tests;
+
+DROP TABLE http_methods;
