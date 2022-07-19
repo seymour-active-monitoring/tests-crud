@@ -19,3 +19,5 @@ DROP TABLE notification_settings;
 DROP TABLE tests;
 
 DROP TABLE http_methods;
+
+DROP TABLE assertion_types;

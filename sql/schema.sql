@@ -1,6 +1,31 @@
+CREATE TABLE assertion_types (
+  id serial PRIMARY KEY,
+  name text NOT NULL UNIQUE,
+  display_name text NOT NULL UNIQUE,
+  supported BOOLEAN
+);
+
 CREATE TABLE http_methods (
   id serial PRIMARY KEY,
   name text NOT NULL UNIQUE,
+  display_name text NOT NULL UNIQUE,
+  supported BOOLEAN
+);
+
+CREATE TABLE comparison_types (
+  id serial PRIMARY KEY,
+  name text NOT NULL UNIQUE,
+  display_name text NOT NULL UNIQUE,
+  symbol text UNIQUE,
+  supported BOOLEAN
+); 
+
+CREATE TABLE regions (
+  id serial PRIMARY KEY,
+  name text NOT NULL UNIQUE,
+  display_name text NOT NULL UNIQUE,
+  aws_name text NOT NULL UNIQUE,
+  flag_url text NOT NULL,
   supported BOOLEAN
 );
 
@@ -50,13 +75,6 @@ CREATE TABLE tests_alerts (
     ON DELETE CASCADE
 );
 
-CREATE TABLE regions (
-  id serial PRIMARY KEY,
-  display_name text NOT NULL,
-  aws_name text NOT NULL,
-  flag_url text NOT NULL
-);
-
 CREATE TABLE test_runs (
   id serial PRIMARY KEY,
   test_id INT
@@ -82,12 +100,6 @@ CREATE TABLE tests_regions (
     NOT NULL
     REFERENCES regions (id)
     ON DELETE CASCADE
-); 
-
-CREATE TABLE comparison_types (
-  id serial PRIMARY KEY,
-  name text NOT NULL,
-  symbol text
 ); 
 
 CREATE TABLE assertions (
