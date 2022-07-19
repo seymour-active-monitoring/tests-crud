@@ -138,7 +138,7 @@ The scheduled tests are returned in JSON format with a 200 response status code.
 
 none
 
-## 1.3. GET /api/test/:id
+## 1.3. GET /api/tests/:id
 
 Get all runs for a single test
 
