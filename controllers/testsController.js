@@ -1,7 +1,6 @@
 const { validationResult } = require('express-validator');
 const { RULE_TARGET_INFO } = require('../constants/aws/locationMappings');
 const { createRule, addTargetLambda, addLambdaPermissions } = require('../lib/aws/eventBridgeActions');
-// const { addNewTest, getTests, getTestDB } = require('../lib/db/query');
 const DB = require('../lib/db/query');
 
 const createEventBridgeRule = async (reqBody) => {
