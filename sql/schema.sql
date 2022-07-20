@@ -56,7 +56,7 @@ CREATE TABLE notification_settings (
 CREATE TABLE alerts (
   id serial PRIMARY KEY,
   type text NOT NULL,
-  webhook text,
+  destination text,
   notification_settings_id INT
     NOT NULL
     REFERENCES notification_settings (id)
