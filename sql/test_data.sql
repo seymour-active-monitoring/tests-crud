@@ -64,11 +64,11 @@ INSERT INTO notification_settings (id, alerts_on_recovery, alerts_on_failure)
 
 INSERT INTO alerts (id, type, destination, notification_settings_id)
   VALUES (100000, 'slack', 'https://hooks.slack.com/services/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', 100000),
-  (100000, 'email', 'team.notspecial@gmail.com', 100000),
-  (100001, 'slack', 'https://hooks.slack.com/services/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', 100001);
+  (100001, 'email', 'team.notspecial@gmail.com', 100000);
 
 INSERT INTO tests_alerts (test_id, alerts_id)
   VALUES (100000,100000),
+         (100000,100001),
          (100001,100001);
 
 INSERT INTO assertions (id, test_id, type, property, comparison_type_id, expected_value)
