@@ -62,9 +62,10 @@ INSERT INTO notification_settings (id, alerts_on_recovery, alerts_on_failure)
   VALUES (100000, false, true),
          (100001, true, true);
 
-INSERT INTO alerts (id, type, webhook, notification_settings_id)
-  VALUES (100000, 'discord', 'https://discord.com/api/webhooks/995792660373704754/3mcFoIu3ZcbccyiSWbYqxvMPSKtbX7DGpHGXDjP7k_Oz5CgC6xXb_SgNdbiXxPsQZ1EC', 100000),
-  (100001, 'discord', 'https://discord.com/api/webhooks/995792660373704754/3mcFoIu3ZcbccyiSWbYqxvMPSKtbX7DGpHGXDjP7k_Oz5CgC6xXb_SgNdbiXxPsQZ1EC', 100001);
+INSERT INTO alerts (id, type, destination, notification_settings_id)
+  VALUES (100000, 'slack', 'https://hooks.slack.com/services/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', 100000),
+  (100000, 'email', 'team.notspecial@gmail.com', 100000),
+  (100001, 'slack', 'https://hooks.slack.com/services/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', 100001);
 
 INSERT INTO tests_alerts (test_id, alerts_id)
   VALUES (100000,100000),
