@@ -59,7 +59,17 @@ Creates a synthetic test
             }
         ]
       }
-    }
+    },
+    "alertChannels": [
+      {
+        "type": "slack",
+        "destination": "https://..."
+      },
+      {
+        "type": "email",
+        "destination": "name@domain.com"
+      }
+    ]
   }
 }
 ```
