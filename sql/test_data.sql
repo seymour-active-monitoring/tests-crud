@@ -106,4 +106,5 @@ INSERT INTO assertion_results (id, test_run_id, assertion_id, actual_value, pass
          (100010, 100004, 100002, '201', true),
          (100011, 100004, 100003, '329', true),
          (100012, 100004, 100004, 'title', true),
-         (100013, 100004, 100005, 'my-test-board', true);
+         (100013, 100004, 100005, 'my-test-board', true),
+         (100014, 100004, 100004, null, true);
