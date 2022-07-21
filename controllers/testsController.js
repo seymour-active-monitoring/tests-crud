@@ -1,3 +1,4 @@
+const axios = require('axios');
 const { validationResult } = require('express-validator');
 const { RULE_TARGET_INFO } = require('../constants/aws/locationMappings');
 const { createRule, addTargetLambda, addLambdaPermissions } = require('../lib/aws/eventBridgeActions');
@@ -71,6 +72,20 @@ const getTest = async (req, res) => {
   }
 };
 
+const runNow = async (req, res) => {
+  try {
+    const testId = req.params.id;
+    // this url will need to come from a config file
+    const lambdaURL = 'https://x3a5z6dcrihrt5dzirl3c6lube0wrlys.lambda-url.us-east-1.on.aws/';
+    const data = await DB.getTestBody(testId);
+    axios.post(lambdaURL, data);
+    res.status(200).send('Run now successful');
+  } catch (err) {
+    console.log('Error: ', err);
+  }
+};
+
+exports.runNow = runNow;
 exports.createTest = createTest;
 exports.getScheduledTests = getScheduledTests;
 exports.getTest = getTest;
