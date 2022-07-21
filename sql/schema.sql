@@ -127,7 +127,7 @@ CREATE TABLE assertion_results (
     NOT NULL
     REFERENCES assertions (id)
     ON DELETE CASCADE,
-  actual_value text NOT NULL,
+  actual_value text,
   pass BOOLEAN NOT NULL
 ); 
 
