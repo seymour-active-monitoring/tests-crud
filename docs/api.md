@@ -63,11 +63,15 @@ Creates a synthetic test
     "alertChannels": [
       {
         "type": "slack",
-        "destination": "https://..."
+        "destination": "https://...",
+        "alertsOnRecovery": false,
+        "alertsOnFailure": true
       },
       {
         "type": "email",
-        "destination": "name@domain.com"
+        "destination": "name@domain.com",
+        "alertsOnRecovery": false,
+        "alertsOnFailure": true
       }
     ]
   }
