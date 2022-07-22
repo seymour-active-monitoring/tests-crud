@@ -4,7 +4,8 @@
   - [1.1. POST /api/tests](#14-post-apitests)
   - [1.2. GET /api/tests](#79-get-apitests)
   - [1.3. GET /api/tests/:id](#138-get-apitest)
-	- [1.4. GET /api/sideload](#201-get-apitest)
+	- [1.4. GET /api/sideload](#201-get-sideload)
+	- [1.5. GET /api/tests/run/:id](#298-get-apitestrun)
 
 ## 1.1. POST /api/tests
 
@@ -293,3 +294,53 @@ The tests runs are returned in JSON format with a 200 response status code.
 #### 1.4.3 Forwarded Payload
 
 none
+
+## 1.5.0 GET /api/tests/run/:id
+
+Run single test run
+
+### 1.5.1. Expected Payload
+
+no payload
+
+### 1.5.2. Successful Response
+
+200 response status code.
+
+#### 1.5.2.1. Example Response
+
+200 OK
+
+#### 1.5.3 Forwarded Payload
+```json
+{
+    "test": {
+        "title": "example-title",
+        "locations": [
+            "us-west-1"
+        ],
+        "minutesBetweenRuns": 1,
+        "type": "API",
+        "httpRequest": {
+            "method": "GET",
+            "url": "https://example-website.com",
+            "headers": null,
+            "body": null,
+            "assertions": {
+                "headers": [
+                    {
+                        "property": "access-control-allow-origin",
+                        "target": "*",
+                        "comparison": "equal_to"
+                    },
+                    {
+                        "property": "connection",
+                        "target": "closed",
+                        "comparison": "equal_to"
+                    }
+                ]
+            }
+        }
+    }
+}
+```
