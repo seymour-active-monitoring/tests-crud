@@ -79,7 +79,7 @@ const runNow = async (req, res) => {
     const lambdaURL = 'https://x3a5z6dcrihrt5dzirl3c6lube0wrlys.lambda-url.us-east-1.on.aws/';
     const data = await DB.getTestBody(testId);
     axios.post(lambdaURL, data);
-    res.status(200).send('Run now successful');
+    res.status(200).send('Send single run succesful');
   } catch (err) {
     console.log('Error: ', err);
   }
