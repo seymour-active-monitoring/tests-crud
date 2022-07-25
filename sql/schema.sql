@@ -87,7 +87,11 @@ CREATE TABLE test_runs (
   region_id INT
     NOT NULL
     REFERENCES regions (id)
-    ON DELETE CASCADE
+    ON DELETE CASCADE,
+  response_status TEXT,
+  response_time TEXT,
+  response_body JSONB,
+  response_headers JSONB
 ); 
 
 CREATE TABLE tests_regions (
