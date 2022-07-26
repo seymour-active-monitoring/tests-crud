@@ -380,60 +380,34 @@ no payload
 
 ```json
 {
-    "name": "example-title",
-    "method": "GET",
-    "url": "https://example-website.com",
-    "createdAt": "2022-07-25T10:47:21.336Z",
+    "name": "first-post-test",
+    "method": "POST",
+    "url": "https://trellific.corkboard.dev/api/boards",
+    "createdAt": "2022-07-27T03:07:31.632Z",
     "updatedAt": null,
     "runs": [
         {
-            "id": 777,
-            "location": "N. California",
-            "success": true,
-            "responseTimeMs": 1234,
-            "assertions": 3,
-            "assertionsPassed": 3,
-            "region": {
-                "id": 3,
-                "flagUrl": "https://countryflagsapi.com/png/usa"
-            }
-        },
-        {
-            "id": 778,
-            "location": "N. California",
-            "success": false,
-            "responseTimeMs": 2341,
-            "assertions": 2,
-            "assertionsPassed": 0,
-            "region": {
-                "id": 3,
-                "flagUrl": "https://countryflagsapi.com/png/usa"
-            }
-        },
-        {
-            "id": 780,
+            "id": 100003,
             "location": "N. Virginia",
-            "success": true,
-            "responseTimeMs": 3241,
-            "assertions": 1,
-            "assertionsPassed": 1,
+            "responseTimeMs": 0,
+            "assertions": 4,
+            "assertionsPassed": 0,
             "region": {
                 "id": 1,
                 "flagUrl": "https://countryflagsapi.com/png/usa"
             }
         },
         {
-            "id": 781,
+            "id": 100004,
             "location": "N. California",
-            "success": false,
-            "responseTimeMs": 1234,
-            "assertions": 1,
+            "responseTimeMs": null,
+            "assertions": 5,
             "assertionsPassed": 0,
             "region": {
                 "id": 3,
                 "flagUrl": "https://countryflagsapi.com/png/usa"
             }
-        },
+        }
     ]
 }
 ```
