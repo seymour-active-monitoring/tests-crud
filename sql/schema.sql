@@ -2,14 +2,18 @@ CREATE TABLE assertion_types (
   id serial PRIMARY KEY,
   name text NOT NULL UNIQUE,
   display_name text NOT NULL UNIQUE,
-  supported BOOLEAN
+  supported BOOLEAN,
+  created_at TIMESTAMP NOT NULL DEFAULT NOW(),
+  updated_at TIMESTAMP
 );
 
 CREATE TABLE http_methods (
   id serial PRIMARY KEY,
   name text NOT NULL UNIQUE,
   display_name text NOT NULL UNIQUE,
-  supported BOOLEAN
+  supported BOOLEAN,
+  created_at TIMESTAMP NOT NULL DEFAULT NOW(),
+  updated_at TIMESTAMP
 );
 
 CREATE TABLE comparison_types (
@@ -17,7 +21,9 @@ CREATE TABLE comparison_types (
   name text NOT NULL UNIQUE,
   display_name text NOT NULL UNIQUE,
   symbol text UNIQUE,
-  supported BOOLEAN
+  supported BOOLEAN,
+  created_at TIMESTAMP NOT NULL DEFAULT NOW(),
+  updated_at TIMESTAMP
 ); 
 
 CREATE TABLE regions (
@@ -26,7 +32,9 @@ CREATE TABLE regions (
   display_name text NOT NULL UNIQUE,
   aws_name text NOT NULL UNIQUE,
   flag_url text NOT NULL,
-  supported BOOLEAN
+  supported BOOLEAN,
+  created_at TIMESTAMP NOT NULL DEFAULT NOW(),
+  updated_at TIMESTAMP
 );
 
 CREATE TABLE tests (
@@ -50,7 +58,9 @@ CREATE TABLE tests (
 CREATE TABLE notification_settings (
   id serial PRIMARY KEY,
   alerts_on_recovery BOOLEAN NOT NULL,
-  alerts_on_failure BOOLEAN NOT NULL
+  alerts_on_failure BOOLEAN NOT NULL,
+  created_at TIMESTAMP NOT NULL DEFAULT NOW(),
+  updated_at TIMESTAMP
 ); 
 
 CREATE TABLE alerts (
@@ -60,7 +70,9 @@ CREATE TABLE alerts (
   notification_settings_id INT
     NOT NULL
     REFERENCES notification_settings (id)
-    ON DELETE CASCADE
+    ON DELETE CASCADE,
+  created_at TIMESTAMP NOT NULL DEFAULT NOW(),
+  updated_at TIMESTAMP
 );
 
 CREATE TABLE tests_alerts (
@@ -72,7 +84,9 @@ CREATE TABLE tests_alerts (
   alerts_id INT
     NOT NULL
     REFERENCES alerts (id)
-    ON DELETE CASCADE
+    ON DELETE CASCADE,
+  created_at TIMESTAMP NOT NULL DEFAULT NOW(),
+  updated_at TIMESTAMP
 );
 
 CREATE TABLE test_runs (
@@ -83,7 +97,7 @@ CREATE TABLE test_runs (
     ON DELETE CASCADE,
   started_at TIMESTAMP NOT NULL,
   completed_at TIMESTAMP,
-  pass BOOLEAN,
+  success BOOLEAN,
   region_id INT
     NOT NULL
     REFERENCES regions (id)
@@ -91,7 +105,9 @@ CREATE TABLE test_runs (
   response_status TEXT,
   response_time TEXT,
   response_body JSONB,
-  response_headers JSONB
+  response_headers JSONB,
+  created_at TIMESTAMP NOT NULL DEFAULT NOW(),
+  updated_at TIMESTAMP
 ); 
 
 CREATE TABLE tests_regions (
@@ -103,7 +119,9 @@ CREATE TABLE tests_regions (
   region_id INT
     NOT NULL
     REFERENCES regions (id)
-    ON DELETE CASCADE
+    ON DELETE CASCADE,
+  created_at TIMESTAMP NOT NULL DEFAULT NOW(),
+  updated_at TIMESTAMP
 ); 
 
 CREATE TABLE assertions (
@@ -118,7 +136,9 @@ CREATE TABLE assertions (
     NOT NULL
     REFERENCES comparison_types (id)
     ON DELETE CASCADE,
-  expected_value text
+  expected_value text,
+  created_at TIMESTAMP NOT NULL DEFAULT NOW(),
+  updated_at TIMESTAMP
 ); 
 
 CREATE TABLE assertion_results (
@@ -132,14 +152,7 @@ CREATE TABLE assertion_results (
     REFERENCES assertions (id)
     ON DELETE CASCADE,
   actual_value text,
-  pass BOOLEAN NOT NULL
-); 
-
--- CREATE TABLE slack_alerts (
---   id serial PRIMARY KEY,
---   webhook text NOT NULL,
---   notification_settings_id INT
---     NOT NULL
---     REFERENCES notification_settings (id)
---     ON DELETE CASCADE
--- );
+  success BOOLEAN NOT NULL,
+  created_at TIMESTAMP NOT NULL DEFAULT NOW(),
+  updated_at TIMESTAMP
+);
