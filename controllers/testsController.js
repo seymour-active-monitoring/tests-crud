@@ -56,7 +56,7 @@ const createTest = async (req, res) => {
 const getScheduledTests = async (req, res) => {
   try {
     const data = await DB.getTests();
-    res.json(data);
+    res.json({ tests: data });
   } catch (err) {
     console.log('Error: ', err);
   }
