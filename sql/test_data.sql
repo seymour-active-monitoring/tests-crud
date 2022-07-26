@@ -30,12 +30,12 @@ INSERT INTO tests_regions (test_id, region_id)
          (100001, 1),
          (100001, 3);
 
-INSERT INTO test_runs (id, test_id, started_at, completed_at, success, region_id)
-  VALUES (100000, 100000, NOW(), NOW(), true, 1),
-         (100001, 100000, NOW(), NOW(), true, 2),
-         (100002, 100000, NOW(), NOW(), true, 3),
-         (100003, 100001, NOW(), NOW(), true, 1),
-         (100004, 100001, NOW(), null, null, 3);
+INSERT INTO test_runs (id, test_id, started_at, completed_at, success, region_id, response_status, response_time, response_body, response_headers)
+  VALUES (100000, 100000, NOW(), NOW(), true, 1, 200, 645, '{}', '{}'),
+         (100001, 100000, NOW(), NOW(), true, 2, 200, 645, '{}', '{}'),
+         (100002, 100000, NOW(), NOW(), true, 3, 200, 645, '{}', '{}'),
+         (100003, 100001, NOW(), NOW(), true, 1, 200, 645, '{}', '{}'),
+         (100004, 100001, NOW(), null, null, 3, 200, 645, '{}', '{}');
 
 INSERT INTO assertion_results (id, test_run_id, assertion_id, actual_value, success)
   VALUES (100000, 100000, 100000, '200', true),
