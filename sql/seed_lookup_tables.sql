@@ -17,7 +17,7 @@ INSERT INTO comparison_types (id, name, display_name, symbol, supported)
          (2, 'notEqualTo', 'Not equal to', '!=', true),
          (3, 'greaterThan', 'Greater than', '>', true),
          (4, 'lessThan', 'Less than', '<', true),
-         (5, 'greaterThanOrEqual_to', 'Greater than or equal to', '>=', true),
+         (5, 'greaterThanOrEqualTo', 'Greater than or equal to', '>=', true),
          (6, 'lessThanOrEqualTo', 'Less than or equal to', '<=', true),
          (7, 'hasKey', 'Has key', null, false),
          (8, 'notHasKey', 'Not has key', null, false),
