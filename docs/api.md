@@ -4,9 +4,9 @@
   - [1.1. POST /api/tests](#14-post-apitests)
   - [1.2. GET /api/tests](#99-get-apitests)
   - [1.3. GET /api/tests/:id](#158-get-apitest)
-	- [1.4. GET /api/sideload](#201-get-sideload)
-	- [1.5. POST /api/tests/:id/run](#298-post-apitestrun)
-	- [1.6. GET /api/tests/:id/run](#304-get-apitestruns)
+  - [1.4. GET /api/sideload](#201-get-sideload)
+  - [1.5. POST /api/tests/:id/run](#298-post-apitestrun)
+  - [1.6. GET /api/tests/:id/run](#304-get-apitestruns)
 
 
 ## 1.1. POST /api/tests
@@ -171,28 +171,28 @@ The tests runs are returned in JSON format with a 200 response status code.
 
 ```json
 [
-	{
-			"name": "example-test-name1",
-			"url": "https://example-website.com",
-			"region": "us-west-1",
-			"type": "statusCode",
-			"property": null,
-			"actual_value": "200",
-			"comparison_type": "=",
-			"expected_value": "200",
-			"pass": false
-	}
-	{
-			"name": "example-test-name2",
-			"url": "https://example-website.com",
-			"region": "us-west-1",
-			"type": "headers",
-			"property": "access-control-allow-origin",
-			"actual_value": "close",
-			"comparison_type": "=",
-			"expected_value": "*",
-			"pass": false
-	},
+  {
+      "name": "example-test-name1",
+      "url": "https://example-website.com",
+      "region": "us-west-1",
+      "type": "statusCode",
+      "property": null,
+      "actual_value": "200",
+      "comparison_type": "=",
+      "expected_value": "200",
+      "pass": false
+  }
+  {
+      "name": "example-test-name2",
+      "url": "https://example-website.com",
+      "region": "us-west-1",
+      "type": "headers",
+      "property": "access-control-allow-origin",
+      "actual_value": "close",
+      "comparison_type": "=",
+      "expected_value": "*",
+      "pass": false
+  },
   {
     "name": "example-test-name3",
     "method": "GET",
