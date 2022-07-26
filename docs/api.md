@@ -2,8 +2,8 @@
 
 - [1. API Documentation](#1-api-documentation)
   - [1.1. POST /api/tests](#14-post-apitests)
-  - [1.2. GET /api/tests](#79-get-apitests)
-  - [1.3. GET /api/tests/:id](#138-get-apitest)
+  - [1.2. GET /api/tests](#99-get-apitests)
+  - [1.3. GET /api/tests/:id](#158-get-apitest)
 	- [1.4. GET /api/sideload](#201-get-sideload)
 	- [1.5. POST /api/tests/:id/run](#298-post-apitestrun)
 	- [1.6. GET /api/tests/:id/run](#304-get-apitestruns)
@@ -118,11 +118,11 @@ The scheduled tests are returned in JSON format with a 200 response status code.
     "run_frequency_mins": 60,
     "method": "GET",
     "url": "https://example.com/api/endpoint",
-    "headers": {},
-    "payload": {},
+    "headers": null,
+    "payload": null,
     "query_params": null,
     "teardown": null,
-    "status": "RUNNING",
+    "status": "enabled",
     "eb_rule_arn": "arn:imfake",
     "created_at": "2022-07-15T20:43:18.001Z",
     "updated_at": null
@@ -171,36 +171,34 @@ The tests runs are returned in JSON format with a 200 response status code.
 
 ```json
 [
+	{
+			"name": "example-test-name1",
+			"url": "https://example-website.com",
+			"region": "us-west-1",
+			"type": "statusCode",
+			"property": null,
+			"actual_value": "200",
+			"comparison_type": "=",
+			"expected_value": "200",
+			"pass": false
+	}
+	{
+			"name": "example-test-name2",
+			"url": "https://example-website.com",
+			"region": "us-west-1",
+			"type": "headers",
+			"property": "access-control-allow-origin",
+			"actual_value": "close",
+			"comparison_type": "=",
+			"expected_value": "*",
+			"pass": false
+	},
   {
-    "name": "first_get_test",
+    "name": "example-test-name3",
     "method": "GET",
-    "url": "https://trellific.corkboard.dev/api/boards",
-    "region": "us-east-1",
-    "type": "response_time_ms",
-    "property": null,
-    "actual_value": "237",
-    "comparison_type": "<=",
-    "expected_value": "500",
-    "pass": true
-  },
-  {
-    "name": "first_get_test",
-    "method": "GET",
-    "url": "https://trellific.corkboard.dev/api/boards",
+    "url": "https://example-website.com",
     "region": "ca-central-1",
-    "type": "response_time_ms",
-    "property": null,
-    "actual_value": "423",
-    "comparison_type": "<=",
-    "expected_value": "500",
-    "pass": false
-  },
-  {
-    "name": "first_get_test",
-    "method": "GET",
-    "url": "https://trellific.corkboard.dev/api/boards",
-    "region": "ca-central-1",
-    "type": "status_code",
+    "type": "statusCode",
     "property": null,
     "actual_value": "200",
     "comparison_type": "=",
@@ -225,7 +223,7 @@ no payload
 
 ### 1.4.2. Successful Response
 
-The tests runs are returned in JSON format with a 200 response status code.
+The tests runs are returned in JSON format with a 200 OK response status code.
 
 #### 1.4.2.1. Example Response
 
