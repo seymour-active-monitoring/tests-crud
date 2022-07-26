@@ -102,10 +102,10 @@ CREATE TABLE test_runs (
     NOT NULL
     REFERENCES regions (id)
     ON DELETE CASCADE,
-  response_status TEXT NOT NULL,
-  response_time TEXT NOT NULL,
+  response_status TEXT,
+  response_time TEXT,
   response_body JSONB,
-  response_headers JSONB NOT NULL,
+  response_headers JSONB,
   created_at TIMESTAMP NOT NULL DEFAULT NOW(),
   updated_at TIMESTAMP
 ); 
