@@ -58,7 +58,7 @@ CREATE TABLE tests (
 CREATE TABLE notification_settings (
   id serial PRIMARY KEY,
   alerts_on_recovery BOOLEAN NOT NULL,
-  alerts_on_failure BOOLEAN NOT NULL
+  alerts_on_failure BOOLEAN NOT NULL,
   created_at TIMESTAMP NOT NULL DEFAULT NOW(),
   updated_at TIMESTAMP
 ); 
@@ -119,7 +119,7 @@ CREATE TABLE tests_regions (
   region_id INT
     NOT NULL
     REFERENCES regions (id)
-    ON DELETE CASCADE
+    ON DELETE CASCADE,
   created_at TIMESTAMP NOT NULL DEFAULT NOW(),
   updated_at TIMESTAMP
 ); 
@@ -137,8 +137,8 @@ CREATE TABLE assertions (
     REFERENCES comparison_types (id)
     ON DELETE CASCADE,
   expected_value text,
-    created_at TIMESTAMP NOT NULL DEFAULT NOW(),
-    updated_at TIMESTAMP
+  created_at TIMESTAMP NOT NULL DEFAULT NOW(),
+  updated_at TIMESTAMP
 ); 
 
 CREATE TABLE assertion_results (
