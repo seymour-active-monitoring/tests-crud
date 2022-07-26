@@ -6,7 +6,7 @@
   - [1.3. GET /api/tests/:id](#158-get-apitest)
   - [1.4. GET /api/sideload](#201-get-sideload)
   - [1.5. POST /api/tests/:id/run](#298-post-apitestrun)
-  - [1.6. GET /api/tests/:id/run](#304-get-apitestruns)
+  - [1.6. GET /api/tests/:id/runs](#304-get-apitestruns)
 
 
 ## 1.1. POST /api/tests
@@ -31,34 +31,34 @@ Creates a synthetic test
       "body": {},
       "assertions": {
         "statusCode": {
-          "comparison": "equal_to",
+          "comparison": "equalTo",
           "target": 200
         },
         "responseTime": {
-          "comparison": "less_than",
+          "comparison": "lessThan",
           "target": 925
         },
         "headers": [
             {
                 "property": "Content-Type",
-                "comparison": "equal_to",
+                "comparison": "equalTo",
                 "target": "application json"
             },
             {
                 "property": "Connection",
-                "comparison": "equal_to",
+                "comparison": "equalTo",
                 "target": "keep-alive"
             }
         ],
         "jsonBody": [
             {
                 "property": "title",
-                "comparison": "equal_to",
+                "comparison": "equalTo",
                 "target": "Test board #2"
             },
             {
                 "property": "lists",
-                "comparison": "is_not_empty"
+                "comparison": "isNotEmpty"
             }
         ]
       }
@@ -143,7 +143,7 @@ The scheduled tests are returned in JSON format with a 200 response status code.
     },
     "query_params": null,
     "teardown": null,
-    "status": "RUNNING",
+    "status": "running",
     "eb_rule_arn": "arn:imfake",
     "created_at": "2022-07-15T20:43:18.001Z",
     "updated_at": null
@@ -335,12 +335,12 @@ no payload
                     {
                         "property": "access-control-allow-origin",
                         "target": "*",
-                        "comparison": "equal_to"
+                        "comparison": "equalTo"
                     },
                     {
                         "property": "connection",
                         "target": "closed",
-                        "comparison": "equal_to"
+                        "comparison": "equalTo"
                     }
                 ]
             }
