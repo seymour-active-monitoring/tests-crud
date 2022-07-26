@@ -5,7 +5,9 @@
   - [1.2. GET /api/tests](#79-get-apitests)
   - [1.3. GET /api/tests/:id](#138-get-apitest)
 	- [1.4. GET /api/sideload](#201-get-sideload)
-	- [1.5. GET /api/tests/run/:id](#298-get-apitestrun)
+	- [1.5. POST /api/tests/:id/run](#298-post-apitestrun)
+	- [1.6. GET /api/tests/:id/run](#304-get-apitestruns)
+
 
 ## 1.1. POST /api/tests
 
@@ -232,14 +234,14 @@ The tests runs are returned in JSON format with a 200 response status code.
   "comparisonTypes": [
     {
       "id": 1,
-      "name": "equal_to",
+      "name": "equalTo",
       "display_name": "Equal to",
       "symbol": "=",
       "supported": true
     },
     {
       "id": 2,
-      "name": "not_equal_to",
+      "name": "notEqualTo",
       "display_name": "Not equal to",
       "symbol": "!=",
       "supported": true
@@ -248,7 +250,7 @@ The tests runs are returned in JSON format with a 200 response status code.
   "regions": [
     {
       "id": 1,
-      "name": "us_east_1",
+      "name": "usEast1",
       "display_name": "N. Virginia",
       "aws_name": "us-east-1",
       "flag_url": "https://countryflagsapi.com/png/usa",
@@ -256,7 +258,7 @@ The tests runs are returned in JSON format with a 200 response status code.
     },
     {
       "id": 2,
-      "name": "us_east_2",
+      "name": "usEast2",
       "display_name": "Ohio",
       "aws_name": "us-east-2",
       "flag_url": "https://countryflagsapi.com/png/usa",
@@ -280,13 +282,13 @@ The tests runs are returned in JSON format with a 200 response status code.
   "assertionTypesResult": [
     {
       "id": 1,
-      "name": "response_time",
+      "name": "responseTime",
       "display_name": "Response time",
       "supported": true
     },
     {
       "id": 2,
-      "name": "status_code",
+      "name": "statusCode",
       "display_name": "Status code",
       "supported": true
     },
@@ -299,7 +301,7 @@ The tests runs are returned in JSON format with a 200 response status code.
 
 none
 
-## 1.5.0 GET /api/tests/run/:id
+## 1.5.0 POST /api/tests/:id/run
 
 Run single test run
 
@@ -348,3 +350,81 @@ no payload
     }
 }
 ```
+
+## 1.5.0 GET /api/tests/:id/runs
+
+Get test runs for a single test
+
+### 1.5.1. Expected Payload
+
+no payload
+
+### 1.5.2. Successful Response
+
+200
+
+#### 1.5.2.1. Example Response
+
+```json
+{
+    "name": "example-title",
+    "method": "GET",
+    "url": "https://example-website.com",
+    "createdAt": "2022-07-25T10:47:21.336Z",
+    "updatedAt": null,
+    "runs": [
+        {
+            "id": 777,
+            "location": "N. California",
+            "success": true,
+            "responseTimeMs": 1234,
+            "assertions": 3,
+            "assertionsPassed": 3,
+            "region": {
+                "id": 3,
+                "flagUrl": "https://countryflagsapi.com/png/usa"
+            }
+        },
+        {
+            "id": 778,
+            "location": "N. California",
+            "success": false,
+            "responseTimeMs": 2341,
+            "assertions": 2,
+            "assertionsPassed": 0,
+            "region": {
+                "id": 3,
+                "flagUrl": "https://countryflagsapi.com/png/usa"
+            }
+        },
+        {
+            "id": 780,
+            "location": "N. Virginia",
+            "success": true,
+            "responseTimeMs": 3241,
+            "assertions": 1,
+            "assertionsPassed": 1,
+            "region": {
+                "id": 1,
+                "flagUrl": "https://countryflagsapi.com/png/usa"
+            }
+        },
+        {
+            "id": 781,
+            "location": "N. California",
+            "success": false,
+            "responseTimeMs": 1234,
+            "assertions": 1,
+            "assertionsPassed": 0,
+            "region": {
+                "id": 3,
+                "flagUrl": "https://countryflagsapi.com/png/usa"
+            }
+        },
+    ]
+}
+```
+
+#### 1.5.3 Forwarded Payload
+
+no payload
