@@ -43,7 +43,37 @@ const formatAssertions = (assertionsArr) => {
   }, {});
 };
 
+const countAssertions = (runId, assertionResults) => {
+  return assertionResults.filter((result) => result.test_run_id === runId).length;
+};
+
+const countAssertionPassed = (runId, assertionResults) => {
+  return assertionResults.filter((result) => {
+    return result.test_run_id === runId && result.pass === true;
+  }).length;
+};
+
+const formatRuns = (runs, assertionResults) => {
+  const testRuns = runs.map((run) => {
+    return {
+      id: run.test_run_id,
+      location: run.display_name,
+      success: run.pass,
+      responseTimeMs: run.difference,
+      assertions: countAssertions(run.test_run_id, assertionResults),
+      assertionsPassed: countAssertionPassed(run.test_run_id, assertionResults),
+      region: {
+        id: run.region_id,
+        flagUrl: run.flag_url,
+      },
+    };
+  });
+
+  return testRuns;
+};
+
 module.exports.snakeToCamel = snakeToCamel;
 module.exports.toCamelCase = toCamelCase;
 module.exports.toDash = toDash;
 module.exports.formatAssertions = formatAssertions;
+module.exports.formatRuns = formatRuns;

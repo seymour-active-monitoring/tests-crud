@@ -85,7 +85,18 @@ const runNow = async (req, res) => {
   }
 };
 
+const getTestRuns = async (req, res) => {
+  try {
+    const testId = req.params.id;
+    const data = await DB.getTestsRuns(testId);
+    res.status(200).json(data);
+  } catch (err) {
+    console.log('Error: ', err);
+  }
+};
+
 exports.runNow = runNow;
 exports.createTest = createTest;
 exports.getScheduledTests = getScheduledTests;
 exports.getTest = getTest;
+exports.getTestRuns = getTestRuns;

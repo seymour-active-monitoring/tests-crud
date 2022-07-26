@@ -10,5 +10,6 @@ router.get('/tests', testsController.getScheduledTests);
 router.get('/tests/:id', testsController.getTest);
 router.get('/sideload', sideloadController.getSideload);
 router.get('/tests/run/:id', testsController.runNow);
+router.get('/tests/:id/runs', testsController.getTestRuns);
 
 module.exports = router;
