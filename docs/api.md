@@ -23,9 +23,9 @@ Creates a synthetic test
       "us-east-1"
     ],
     "minutesBetweenRuns": 60,
-    "type": "API",
+    "type": "api",
     "httpRequest": {
-      "method": "GET",
+      "method": "get",
       "url": "https://example.com/api/endpoint",
       "headers": {},
       "body": {},

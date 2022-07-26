@@ -2,11 +2,11 @@ const { check } = require('express-validator');
 
 const MINIMUM_TITLE_LENGTH = 5;
 const MAXIMUM_TITLE_LENGTH = 128;
-const TEST_TYPES = ['API'];
+const TEST_TYPES = ['api'];
 // TODO: pull from database?
-const HTTP_METHODS = ['GET', 'POST', 'PUT', 'DELETE'];
+const HTTP_METHODS = ['get', 'post', 'put', 'delete'];
 // TODO: pull from database?
-const AWS_LOCATIONS = ['us-east-1', 'us-west-1', 'eu-north-1'];
+const AWS_LOCATIONS = ['us-east-1', 'us-west-1', 'eu-north-1', 'ca-central-1'];
 
 // TODO: add validation for assertions
 // TODO: add optional validation for headers
@@ -41,6 +41,6 @@ exports.validateTest = [
     .isURL()
     .withMessage('must be a valid url'),
   check('test.httpRequest.assertions')
-    .isObject()
+    .isArray()
     .withMessage('must be an object'),
 ];
