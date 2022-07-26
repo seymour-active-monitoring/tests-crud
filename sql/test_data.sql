@@ -1,4 +1,4 @@
-INSERT INTO tests (id, name, run_frequency_mins, method_id, url, headers, payload, status, eb_rule_arn)
+INSERT INTO tests (id, name, run_frequency_mins, method_id, url, headers, body, status, eb_rule_arn)
   VALUES (100000, 'first-get-test', 5, 1, 'https://trellific.corkboard.dev/api/boards','{}','{}', 'enabled', 'arn:imfake'),
          (100001,'first-post-test', 5, 2, 'https://trellific.corkboard.dev/api/boards', '{"Content-Type": "application/json"}', '{"board":{"title":"post-test-board"}}', 'enabled', 'arn:imfake');
 

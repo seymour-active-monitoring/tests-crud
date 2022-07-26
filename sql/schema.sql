@@ -46,7 +46,7 @@ CREATE TABLE tests (
     REFERENCES http_methods (id),
   url text NOT NULL,
   headers JSONB,
-  payload JSONB,
+  body JSONB,
   query_params JSONB,
   teardown text,
   status text NOT NULL,

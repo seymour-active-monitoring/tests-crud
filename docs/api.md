@@ -18,65 +18,47 @@ Creates a synthetic test
 ```json
 {
   "test": {
-    "title": "My new test",
+    "title": "New-UI-test",
     "locations": [
-      "us-east-1"
+        "us-east-1",
+        "us-west-1",
+        "ca-central-1",
+        "eu-north-1"
     ],
-    "minutesBetweenRuns": 60,
-    "type": "API",
+    "minutesBetweenRuns": "1",
+    "type": "api",
     "httpRequest": {
-      "method": "GET",
-      "url": "https://example.com/api/endpoint",
+      "method": "get",
+      "url": "https://trellific.corkboard.dev/api/boards",
       "headers": {},
       "body": {},
-      "assertions": {
-        "statusCode": {
-          "comparison": "equalTo",
-          "target": 200
-        },
-        "responseTime": {
-          "comparison": "lessThan",
-          "target": 925
-        },
-        "headers": [
-            {
-                "property": "Content-Type",
-                "comparison": "equalTo",
-                "target": "application json"
-            },
-            {
-                "property": "Connection",
-                "comparison": "equalTo",
-                "target": "keep-alive"
-            }
-        ],
-        "jsonBody": [
-            {
-                "property": "title",
-                "comparison": "equalTo",
-                "target": "Test board #2"
-            },
-            {
-                "property": "lists",
-                "comparison": "isNotEmpty"
-            }
-        ]
-      }
-    },
-    "alertChannels": [
+      "assertions": [
       {
-        "type": "slack",
-        "destination": "https://...",
-        "alertsOnRecovery": false,
-        "alertsOnFailure": true
+        "type": "responseTime",
+        "property": "",
+        "comparison": "lessThan",
+        "target": "500"
       },
       {
-        "type": "email",
-        "destination": "name@domain.com",
-        "alertsOnRecovery": false,
-        "alertsOnFailure": true
+        "type": "statusCode",
+        "property": "",
+        "comparison": "equalTo",
+        "target": "200"
+      },
+      {
+        "type": "header",
+        "property": "access-control-allow-origin",
+        "comparison": "equalTo",
+        "target": "*"
+      },
+      {
+        "type": "body",
+        "property": "",
+        "comparison": "contains",
+        "target": "_id"
       }
     ]
+    }
   }
 }
 ```
@@ -111,44 +93,46 @@ The scheduled tests are returned in JSON format with a 200 response status code.
 #### 1.2.2.1. Example Response
 
 ```json
-[
-  {
-    "id": 100000,
-    "name": "first_get_test",
-    "run_frequency_mins": 60,
-    "method": "GET",
-    "url": "https://example.com/api/endpoint",
-    "headers": null,
-    "payload": null,
-    "query_params": null,
-    "teardown": null,
-    "status": "enabled",
-    "eb_rule_arn": "arn:imfake",
-    "created_at": "2022-07-15T20:43:18.001Z",
-    "updated_at": null
-  },
-  {
-    "id": 100001,
-    "name": "first_post_test",
-    "run_frequency_mins": 60,
-    "method": "POST",
-    "url": "https://example.com/api/endpoint",
-    "headers": {
-        "Content-Type": "application/json"
-    },
-    "payload": {
-        "board": {
-            "title": "post-test-board"
+{
+    "tests": [
+        {
+            "id": 100000,
+            "name": "first-get-test",
+            "run_frequency_mins": 5,
+            "method_id": 1,
+            "url": "https://trellific.corkboard.dev/api/boards",
+            "headers": {},
+            "body": {},
+            "query_params": null,
+            "teardown": null,
+            "status": "enabled",
+            "eb_rule_arn": "arn:imfake",
+            "created_at": "2022-07-27T03:07:31.632Z",
+            "updated_at": null
+        },
+        {
+            "id": 100001,
+            "name": "first-post-test",
+            "run_frequency_mins": 5,
+            "method_id": 2,
+            "url": "https://trellific.corkboard.dev/api/boards",
+            "headers": {
+                "Content-Type": "application/json"
+            },
+            "body": {
+                "board": {
+                    "title": "post-test-board"
+                }
+            },
+            "query_params": null,
+            "teardown": null,
+            "status": "enabled",
+            "eb_rule_arn": "arn:imfake",
+            "created_at": "2022-07-27T03:07:31.632Z",
+            "updated_at": null
         }
-    },
-    "query_params": null,
-    "teardown": null,
-    "status": "running",
-    "eb_rule_arn": "arn:imfake",
-    "created_at": "2022-07-15T20:43:18.001Z",
-    "updated_at": null
-  }
-]
+    ]
+}
 ```
 
 #### 1.2.3 Forwarded Payload
@@ -171,42 +155,73 @@ The tests runs are returned in JSON format with a 200 response status code.
 
 ```json
 [
-  {
-      "name": "example-test-name1",
-      "url": "https://example-website.com",
-      "region": "us-west-1",
-      "type": "statusCode",
-      "property": null,
-      "actual_value": "200",
-      "comparison_type": "=",
-      "expected_value": "200",
-      "pass": false
-  }
-  {
-      "name": "example-test-name2",
-      "url": "https://example-website.com",
-      "region": "us-west-1",
-      "type": "headers",
-      "property": "access-control-allow-origin",
-      "actual_value": "close",
-      "comparison_type": "=",
-      "expected_value": "*",
-      "pass": false
-  },
-  {
-    "name": "example-test-name3",
-    "method": "GET",
-    "url": "https://example-website.com",
-    "region": "ca-central-1",
-    "type": "statusCode",
-    "property": null,
-    "actual_value": "200",
-    "comparison_type": "=",
-    "expected_value": "200",
-    "pass": true
-  },
+    {
+        "name": "get",
+        "url": "https://trellific.corkboard.dev/api/boards",
+        "region": "us-east-1",
+        "type": "responseTimeMs",
+        "property": null,
+        "actual_value": "237",
+        "comparison": "lessThan",
+        "expected_value": "500",
+        "success": true
+    },
+    {
+        "name": "get",
+        "url": "https://trellific.corkboard.dev/api/boards",
+        "region": "us-east-1",
+        "type": "statusCode",
+        "property": null,
+        "actual_value": "200",
+        "comparison": "equalTo",
+        "expected_value": "200",
+        "success": true
+    },
+    {
+        "name": "get",
+        "url": "https://trellific.corkboard.dev/api/boards",
+        "region": "us-east-2",
+        "type": "responseTimeMs",
+        "property": null,
+        "actual_value": "423",
+        "comparison": "lessThan",
+        "expected_value": "500",
+        "success": true
+    },
+    {
+        "name": "get",
+        "url": "https://trellific.corkboard.dev/api/boards",
+        "region": "us-east-2",
+        "type": "statusCode",
+        "property": null,
+        "actual_value": "200",
+        "comparison": "equalTo",
+        "expected_value": "200",
+        "success": true
+    },
+    {
+        "name": "get",
+        "url": "https://trellific.corkboard.dev/api/boards",
+        "region": "us-west-1",
+        "type": "responseTimeMs",
+        "property": null,
+        "actual_value": "96",
+        "comparison": "lessThan",
+        "expected_value": "500",
+        "success": true
+    },
+    {
+        "name": "get",
+        "url": "https://trellific.corkboard.dev/api/boards",
+        "region": "us-west-1",
+        "type": "statusCode",
+        "property": null,
+        "actual_value": "200",
+        "comparison": "equalTo",
+        "expected_value": "200",
+        "success": true
+    }
 ]
-
 ```
 
 #### 1.3.3 Forwarded Payload
@@ -229,7 +244,7 @@ The tests runs are returned in JSON format with a 200 OK response status code.
 
 ```json
 {
-  "comparisonTypes": [
+  "comparisons": [
     {
       "id": 1,
       "name": "equalTo",
@@ -335,12 +350,12 @@ no payload
                     {
                         "property": "access-control-allow-origin",
                         "target": "*",
-                        "comparison": "equalTo"
+                        "comparison": "equal_to"
                     },
                     {
                         "property": "connection",
                         "target": "closed",
-                        "comparison": "equalTo"
+                        "comparison": "equal_to"
                     }
                 ]
             }
@@ -365,60 +380,34 @@ no payload
 
 ```json
 {
-    "name": "example-title",
-    "method": "GET",
-    "url": "https://example-website.com",
-    "createdAt": "2022-07-25T10:47:21.336Z",
+    "name": "first-post-test",
+    "method": "POST",
+    "url": "https://trellific.corkboard.dev/api/boards",
+    "createdAt": "2022-07-27T03:07:31.632Z",
     "updatedAt": null,
     "runs": [
         {
-            "id": 777,
-            "location": "N. California",
-            "success": true,
-            "responseTimeMs": 1234,
-            "assertions": 3,
-            "assertionsPassed": 3,
-            "region": {
-                "id": 3,
-                "flagUrl": "https://countryflagsapi.com/png/usa"
-            }
-        },
-        {
-            "id": 778,
-            "location": "N. California",
-            "success": false,
-            "responseTimeMs": 2341,
-            "assertions": 2,
-            "assertionsPassed": 0,
-            "region": {
-                "id": 3,
-                "flagUrl": "https://countryflagsapi.com/png/usa"
-            }
-        },
-        {
-            "id": 780,
+            "id": 100003,
             "location": "N. Virginia",
-            "success": true,
-            "responseTimeMs": 3241,
-            "assertions": 1,
-            "assertionsPassed": 1,
+            "responseTimeMs": 0,
+            "assertions": 4,
+            "assertionsPassed": 0,
             "region": {
                 "id": 1,
                 "flagUrl": "https://countryflagsapi.com/png/usa"
             }
         },
         {
-            "id": 781,
+            "id": 100004,
             "location": "N. California",
-            "success": false,
-            "responseTimeMs": 1234,
-            "assertions": 1,
+            "responseTimeMs": null,
+            "assertions": 5,
             "assertionsPassed": 0,
             "region": {
                 "id": 3,
                 "flagUrl": "https://countryflagsapi.com/png/usa"
             }
-        },
+        }
     ]
 }
 ```
