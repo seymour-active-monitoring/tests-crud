@@ -3,8 +3,8 @@ const TestRun = require('../../entities/TestRun');
 const modelToEntityTestRun = (testRunData) => new TestRun({
   id: testRunData.run_id,
   testId: testRunData.test_id,
-  success: testRunData.success,
-  createdAt: testRunData.created_at,
+  success: testRunData.run_success,
+  createdAt: testRunData.run_created_at,
 });
 
 const entityToJsonTestRun = (testRunEntity) => ({

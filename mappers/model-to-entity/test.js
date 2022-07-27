@@ -3,14 +3,16 @@ const { entityToJsonTestRun } = require('./testRun');
 
 const modelToEntityTest = (modelTestRow) => new Test({
   id: modelTestRow.test_id,
-  name: modelTestRow.name,
+  name: modelTestRow.test_name,
   minutesBetweenRuns: modelTestRow.run_frequency_mins,
+  createdAt: modelTestRow.test_created_at,
 });
 
 const entityToJsonTest = (entityTest) => ({
   id: entityTest.id,
   name: entityTest.name,
   minutesBetweenRuns: entityTest.minutesBetweenRuns,
+  createdAt: entityTest.createdAt,
   runs: entityTest.runs.map((run) => entityToJsonTestRun(run)),
 });
 
