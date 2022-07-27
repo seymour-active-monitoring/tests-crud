@@ -97,8 +97,9 @@ The tests are returned in JSON format with a 200 response status code.
     "tests": [
         {
             "id": 1,
-            "name": "New-tesst-deployed",
+            "name": "New-test-deployed",
             "minutesBetweenRuns": 1,
+            "createdAt": "2022-07-26 21:07:31.63249",
             "runs": [
                 {
                     "success": false,
@@ -118,6 +119,7 @@ The tests are returned in JSON format with a 200 response status code.
             "id": 2,
             "name": "New-test-deployed-2",
             "minutesBetweenRuns": 1,
+            "createdAt": "2022-07-26 21:07:29.69851",
             "runs": [
                 {
                     "success": true,
@@ -137,6 +139,7 @@ The tests are returned in JSON format with a 200 response status code.
             "id": 3,
             "name": "0726-t1",
             "minutesBetweenRuns": 1,
+            "createdAt": "2022-07-26 21:07:32.62547",
             "runs": [
                 {
                     "success": true,
@@ -156,6 +159,7 @@ The tests are returned in JSON format with a 200 response status code.
             "id": 100000,
             "name": "first-get-test",
             "minutesBetweenRuns": 5,
+            "createdAt": "2022-07-26 21:07:40.69877",
             "runs": [
                 {
                     "success": true,
@@ -175,9 +179,10 @@ The tests are returned in JSON format with a 200 response status code.
             "id": 100001,
             "name": "first-post-test",
             "minutesBetweenRuns": 5,
+            "createdAt": "2022-07-26 21:07:35.65781",
             "runs": [
                 {
-                    "success": null,
+                    "success": true,
                     "createdAt": "2022-07-27T04:07:31.632Z"
                 },
                 {
