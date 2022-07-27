@@ -80,7 +80,7 @@ The payload received from the client (refer to 1.1.1) is forwarded to EventBridg
 
 ## 1.2. GET /api/tests
 
-Get all scheduled test
+Get all tests and results from last three runs
 
 ### 1.2.1. Expected Payload
 
@@ -88,7 +88,7 @@ no payload
 
 ### 1.2.2. Successful Response
 
-The scheduled tests are returned in JSON format with a 200 response status code.
+The tests are returned in JSON format with a 200 response status code.
 
 #### 1.2.2.1. Example Response
 
@@ -96,40 +96,95 @@ The scheduled tests are returned in JSON format with a 200 response status code.
 {
     "tests": [
         {
+            "id": 1,
+            "name": "New-tesst-deployed",
+            "minutesBetweenRuns": 1,
+            "runs": [
+                {
+                    "success": false,
+                    "createdAt": "2022-07-27T05:23:57.982Z"
+                },
+                {
+                    "success": null,
+                    "createdAt": "2022-07-27T05:22:14.703Z"
+                },
+                {
+                    "success": null,
+                    "createdAt": "2022-07-27T05:21:16.181Z"
+                }
+            ]
+        },
+        {
+            "id": 2,
+            "name": "New-test-deployed-2",
+            "minutesBetweenRuns": 1,
+            "runs": [
+                {
+                    "success": true,
+                    "createdAt": "2022-07-27T09:05:14.687Z"
+                },
+                {
+                    "success": true,
+                    "createdAt": "2022-07-27T09:05:14.128Z"
+                },
+                {
+                    "success": true,
+                    "createdAt": "2022-07-27T09:05:14.108Z"
+                }
+            ]
+        },
+        {
+            "id": 3,
+            "name": "0726-t1",
+            "minutesBetweenRuns": 1,
+            "runs": [
+                {
+                    "success": true,
+                    "createdAt": "2022-07-27T06:31:57.264Z"
+                },
+                {
+                    "success": true,
+                    "createdAt": "2022-07-27T06:26:15.211Z"
+                },
+                {
+                    "success": true,
+                    "createdAt": "2022-07-27T06:25:15.331Z"
+                }
+            ]
+        },
+        {
             "id": 100000,
             "name": "first-get-test",
-            "run_frequency_mins": 5,
-            "method_id": 1,
-            "url": "https://trellific.corkboard.dev/api/boards",
-            "headers": {},
-            "body": {},
-            "query_params": null,
-            "teardown": null,
-            "status": "enabled",
-            "eb_rule_arn": "arn:imfake",
-            "created_at": "2022-07-27T03:07:31.632Z",
-            "updated_at": null
+            "minutesBetweenRuns": 5,
+            "runs": [
+                {
+                    "success": true,
+                    "createdAt": "2022-07-27T04:07:31.632Z"
+                },
+                {
+                    "success": true,
+                    "createdAt": "2022-07-27T04:07:31.632Z"
+                },
+                {
+                    "success": true,
+                    "createdAt": "2022-07-27T04:07:31.632Z"
+                }
+            ]
         },
         {
             "id": 100001,
             "name": "first-post-test",
-            "run_frequency_mins": 5,
-            "method_id": 2,
-            "url": "https://trellific.corkboard.dev/api/boards",
-            "headers": {
-                "Content-Type": "application/json"
-            },
-            "body": {
-                "board": {
-                    "title": "post-test-board"
+            "minutesBetweenRuns": 5,
+            "runs": [
+                {
+                    "success": null,
+                    "createdAt": "2022-07-27T04:07:31.632Z"
+                },
+                {
+                    "success": true,
+                    "createdAt": "2022-07-27T04:07:31.632Z"
                 }
-            },
-            "query_params": null,
-            "teardown": null,
-            "status": "enabled",
-            "eb_rule_arn": "arn:imfake",
-            "created_at": "2022-07-27T03:07:31.632Z",
-            "updated_at": null
+            ]
         }
     ]
 }

@@ -6,7 +6,8 @@ const { validateTest } = require('../validators/test');
 const router = express.Router();
 
 router.post('/tests', validateTest, testsController.createTest);
-router.get('/tests', testsController.getScheduledTests);
+// router.get('/tests', testsController.getScheduledTests);
+router.get('/tests', testsController.getTests);
 router.get('/tests/:id', testsController.getTest);
 router.get('/sideload', sideloadController.getSideload);
 router.post('/tests/:id/run', testsController.runNow);
