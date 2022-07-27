@@ -2,6 +2,7 @@ const { check } = require('express-validator');
 
 const MINIMUM_TITLE_LENGTH = 5;
 const MAXIMUM_TITLE_LENGTH = 128;
+const TITLE_REGEX = /^[.\-_A-Za-z0-9]+$/;
 const TEST_TYPES = ['api'];
 // TODO: pull from database?
 const HTTP_METHODS = ['get', 'post', 'put', 'delete'];
@@ -18,7 +19,9 @@ exports.validateTest = [
     .isLength({ min: MINIMUM_TITLE_LENGTH })
     .withMessage(`must be at least ${MINIMUM_TITLE_LENGTH} characters long`)
     .isLength({ max: 128 })
-    .withMessage(`must be at most ${MAXIMUM_TITLE_LENGTH} characters long`),
+    .withMessage(`must be at most ${MAXIMUM_TITLE_LENGTH} characters long`)
+    .matches(TITLE_REGEX)
+    .withMessage(`must satisfy regular expression pattern: ${TITLE_REGEX}`),
   check('test.locations')
     .isArray()
     .withMessage('must be an array'),
