@@ -3,11 +3,11 @@ const { validationResult } = require('express-validator');
 const { RULE_TARGET_INFO } = require('../constants/aws/locationMappings');
 const { createRule, addTargetLambda, addLambdaPermissions } = require('../lib/aws/eventBridgeActions');
 const DB = require('../lib/db/query');
-const getAllTests = require('../lib/db/queries/getAllTests');
-const Test = require('../entities/Test');
-const { modelToEntityTest, entityToJsonTests } = require('../mappers/model-to-entity/test');
-const { modelToEntityTestRun } = require('../mappers/model-to-entity/testRun');
+const queries = require('../lib/db/queries');
+const { modelToEntityTest, entityToJsonTests, entityToJsonTest } = require('../mappers/test');
+const { modelToEntityTestRun } = require('../mappers/testRun');
 const Tests = require('../entities/Tests');
+const { modelToEntityAssertion } = require('../mappers/assertion');
 
 const createEventBridgeRule = async (reqBody) => {
   const { test } = reqBody;
@@ -80,8 +80,8 @@ const getTest = async (req, res) => {
 const getTests = async (req, res) => {
   try {
     const tests = new Tests();
-    const testsData = await getAllTests();
-    testsData.map((t) => {
+    const testsData = await queries.getAllTests();
+    testsData.forEach((t) => {
       const test = modelToEntityTest(t);
       if (!tests.containsTest(test.id)) {
         tests.addTest(test);
@@ -121,9 +121,29 @@ const getTestRuns = async (req, res) => {
   }
 };
 
+const getTestRun = async (req, res) => {
+  try {
+    const { runId } = req.params;
+    const testRunData = await queries.getTestRun(runId);
+    const test = modelToEntityTest(testRunData[0]);
+    const run = modelToEntityTestRun(testRunData[0]);
+    test.addRun(run);
+    testRunData.forEach((tr) => {
+      const assertion = modelToEntityAssertion(tr);
+      run.addAssertion(assertion);
+    });
+    const testRunJson = entityToJsonTest(test);
+    res.status(200).json(testRunJson);
+  } catch (err) {
+    res.status(500).send(err);
+    console.log('Error: ', err);
+  }
+};
+
 exports.runNow = runNow;
 exports.createTest = createTest;
 exports.getScheduledTests = getScheduledTests;
 exports.getTest = getTest;
 exports.getTests = getTests;
 exports.getTestRuns = getTestRuns;
+exports.getTestRun = getTestRun;

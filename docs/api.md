@@ -1,13 +1,45 @@
 <!-- TOC -->
 
 - [1. API Documentation](#1-api-documentation)
-  - [1.1. POST /api/tests](#14-post-apitests)
-  - [1.2. GET /api/tests](#99-get-apitests)
-  - [1.3. GET /api/tests/:id](#158-get-apitest)
-  - [1.4. GET /api/sideload](#201-get-sideload)
-  - [1.5. POST /api/tests/:id/run](#298-post-apitestrun)
-  - [1.6. GET /api/tests/:id/runs](#304-get-apitestruns)
+  * [1.1. POST /api/tests](#11-post--api-tests)
+    + [1.1.1. Expected Payload](#111-expected-payload)
+    + [1.1.2. Successful Response](#112-successful-response)
+      - [1.1.2.1. Example Response](#1121-example-response)
+      - [1.1.3 Forwarded Payload](#113-forwarded-payload)
+  * [1.2. GET /api/tests](#12-get--api-tests)
+    + [1.2.1. Expected Payload](#121-expected-payload)
+    + [1.2.2. Successful Response](#122-successful-response)
+      - [1.2.2.1. Example Response](#1221-example-response)
+      - [1.2.3 Forwarded Payload](#123-forwarded-payload)
+  * [1.3. GET /api/tests/:id](#13-get--api-tests--id)
+    + [1.3.1. Expected Payload](#131-expected-payload)
+    + [1.3.2. Successful Response](#132-successful-response)
+      - [1.3.2.1. Example Response](#1321-example-response)
+      - [1.3.3 Forwarded Payload](#133-forwarded-payload)
+  * [1.4.0 GET /api/sideload](#140-get--api-sideload)
+    + [1.4.1. Expected Payload](#141-expected-payload)
+    + [1.4.2. Successful Response](#142-successful-response)
+      - [1.4.2.1. Example Response](#1421-example-response)
+      - [1.4.3 Forwarded Payload](#143-forwarded-payload)
+  * [1.5.0 POST /api/tests/:id/run](#150-post--api-tests--id-run)
+    + [1.5.1. Expected Payload](#151-expected-payload)
+    + [1.5.2. Successful Response](#152-successful-response)
+      - [1.5.2.1. Example Response](#1521-example-response)
+      - [1.5.3 Forwarded Payload](#153-forwarded-payload)
+  * [1.5.0 GET /api/tests/:id/runs](#150-get--api-tests--id-runs)
+    + [1.5.1. Expected Payload](#151-expected-payload-1)
+    + [1.5.2. Successful Response](#152-successful-response-1)
+      - [1.5.2.1. Example Response](#1521-example-response-1)
+      - [1.5.3 Forwarded Payload](#153-forwarded-payload-1)
+  * [1.6.0. GET /api/tests/:testId/runs/:runId](#160-get--api-tests--testid-runs--runid)
+    + [1.6.1. Expected payload](#161-expected-payload)
+    + [1.6.2. Successful response](#162-successful-response)
+      - [1.6.2.1 Example response](#1621-example-response)
 
+<!-- /TOC -->
+<!-- generated using: https://ecotrust-canada.github.io/markdown-toc/ -->
+
+# 1. API Documentation
 
 ## 1.1. POST /api/tests
 
@@ -96,62 +128,31 @@ The tests are returned in JSON format with a 200 response status code.
 {
     "tests": [
         {
-            "id": 1,
-            "name": "New-test-deployed",
+            "id": 14,
+            "name": "New-UI-test",
             "minutesBetweenRuns": 1,
-            "createdAt": "2022-07-26 21:07:31.63249",
+            "createdAt": "2022-07-28T04:31:38.157Z",
             "runs": [
                 {
+                    "id": 14,
+                    "testId": 14,
+                    "success": true,
+                    "createdAt": "2022-07-28T04:33:47.514Z",
+                    "assertions": []
+                },
+                {
+                    "id": 14,
+                    "testId": 14,
                     "success": false,
-                    "createdAt": "2022-07-27T05:23:57.982Z"
+                    "createdAt": "2022-07-28T04:33:47.238Z",
+                    "assertions": []
                 },
                 {
-                    "success": null,
-                    "createdAt": "2022-07-27T05:22:14.703Z"
-                },
-                {
-                    "success": null,
-                    "createdAt": "2022-07-27T05:21:16.181Z"
-                }
-            ]
-        },
-        {
-            "id": 2,
-            "name": "New-test-deployed-2",
-            "minutesBetweenRuns": 1,
-            "createdAt": "2022-07-26 21:07:29.69851",
-            "runs": [
-                {
-                    "success": true,
-                    "createdAt": "2022-07-27T09:05:14.687Z"
-                },
-                {
-                    "success": true,
-                    "createdAt": "2022-07-27T09:05:14.128Z"
-                },
-                {
-                    "success": true,
-                    "createdAt": "2022-07-27T09:05:14.108Z"
-                }
-            ]
-        },
-        {
-            "id": 3,
-            "name": "0726-t1",
-            "minutesBetweenRuns": 1,
-            "createdAt": "2022-07-26 21:07:32.62547",
-            "runs": [
-                {
-                    "success": true,
-                    "createdAt": "2022-07-27T06:31:57.264Z"
-                },
-                {
-                    "success": true,
-                    "createdAt": "2022-07-27T06:26:15.211Z"
-                },
-                {
-                    "success": true,
-                    "createdAt": "2022-07-27T06:25:15.331Z"
+                    "id": 14,
+                    "testId": 14,
+                    "success": false,
+                    "createdAt": "2022-07-28T04:33:00.915Z",
+                    "assertions": []
                 }
             ]
         },
@@ -159,19 +160,35 @@ The tests are returned in JSON format with a 200 response status code.
             "id": 100000,
             "name": "first-get-test",
             "minutesBetweenRuns": 5,
-            "createdAt": "2022-07-26 21:07:40.69877",
+            "createdAt": "2022-07-27T04:07:31.632Z",
             "runs": [
                 {
-                    "success": true,
-                    "createdAt": "2022-07-27T04:07:31.632Z"
+                    "id": 100000,
+                    "testId": 100000,
+                    "success": false,
+                    "createdAt": "2022-07-28T04:20:39.445Z",
+                    "assertions": []
                 },
                 {
+                    "id": 100000,
+                    "testId": 100000,
                     "success": true,
-                    "createdAt": "2022-07-27T04:07:31.632Z"
+                    "createdAt": "2022-07-27T04:07:31.632Z",
+                    "assertions": []
                 },
                 {
+                    "id": 100000,
+                    "testId": 100000,
                     "success": true,
-                    "createdAt": "2022-07-27T04:07:31.632Z"
+                    "createdAt": "2022-07-27T04:07:31.632Z",
+                    "assertions": []
+                },
+                {
+                    "id": 100000,
+                    "testId": 100000,
+                    "success": true,
+                    "createdAt": "2022-07-27T04:07:31.632Z",
+                    "assertions": []
                 }
             ]
         },
@@ -179,15 +196,21 @@ The tests are returned in JSON format with a 200 response status code.
             "id": 100001,
             "name": "first-post-test",
             "minutesBetweenRuns": 5,
-            "createdAt": "2022-07-26 21:07:35.65781",
+            "createdAt": "2022-07-27T04:07:31.632Z",
             "runs": [
                 {
+                    "id": 100001,
+                    "testId": 100001,
                     "success": true,
-                    "createdAt": "2022-07-27T04:07:31.632Z"
+                    "createdAt": "2022-07-27T04:07:31.632Z",
+                    "assertions": []
                 },
                 {
-                    "success": true,
-                    "createdAt": "2022-07-27T04:07:31.632Z"
+                    "id": 100001,
+                    "testId": 100001,
+                    "success": null,
+                    "createdAt": "2022-07-27T04:07:31.632Z",
+                    "assertions": []
                 }
             ]
         }
@@ -475,3 +498,58 @@ no payload
 #### 1.5.3 Forwarded Payload
 
 no payload
+
+## 1.6.0. GET /api/tests/:testId/runs/:runId
+
+Get data for a single test run
+
+### 1.6.1. Expected payload
+
+no playload
+
+### 1.6.2. Successful response 
+
+200
+
+#### 1.6.2.1 Example response 
+```json
+{
+    "id": 100000,
+    "name": "first-get-test",
+    "method": "get",
+    "createdAt": "2022-07-27T04:07:31.632Z",
+    "runs": [
+        {
+            "id": 100000,
+            "testId": 100000,
+            "success": true,
+            "completedAt": "2022-07-27T04:07:31.632Z",
+            "regionName": "us-east-1",
+            "regionDisplayName": "N. Virginia",
+            "regionFlagUrl": "https://countryflagsapi.com/png/usa",
+            "responseTime": "645",
+            "responseStatus": "200",
+            "responseBody": {},
+            "responseHeaders": {},
+            "assertions": [
+                {
+                    "type": "statusCode",
+                    "property": null,
+                    "comparison": "equalTo",
+                    "expectedValue": "200",
+                    "actualValue": "200",
+                    "success": true
+                },
+                {
+                    "type": "responseTimeMs",
+                    "property": null,
+                    "comparison": "lessThan",
+                    "expectedValue": "500",
+                    "actualValue": "237",
+                    "success": true
+                }
+            ]
+        }
+    ]
+}
+```

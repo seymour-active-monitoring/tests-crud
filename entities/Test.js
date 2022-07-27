@@ -1,17 +1,31 @@
+/* eslint-disable no-underscore-dangle */
 class Test {
   constructor({
-    id, name, minutesBetweenRuns, createdAt,
+    id, name, minutesBetweenRuns, method, createdAt,
   }) {
-    this.id = id;
-    this.name = name;
-    this.minutesBetweenRuns = minutesBetweenRuns;
-    this.createdAt = createdAt;
-    this.runs = [];
+    this._id = id;
+    this._name = name;
+    this._minutesBetweenRuns = minutesBetweenRuns;
+    this._method = method;
+    this._createdAt = createdAt;
+    this._runs = [];
   }
 
   addRun(run) {
-    this.runs.push(run);
+    this._runs.push(run);
   }
+
+  get id() { return this._id; }
+
+  get name() { return this._name; }
+
+  get minutesBetweenRuns() { return this._minutesBetweenRuns; }
+
+  get method() { return this._method; }
+
+  get createdAt() { return this._createdAt; }
+
+  get runs() { return this._runs; }
 }
 
 module.exports = Test;
