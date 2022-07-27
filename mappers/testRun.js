@@ -1,4 +1,4 @@
-const TestRun = require('../../entities/TestRun');
+const TestRun = require('../entities/TestRun');
 const { entityToJsonAssertion } = require('./assertion');
 
 const modelToEntityTestRun = (testRunData) => new TestRun({

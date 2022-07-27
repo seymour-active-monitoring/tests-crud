@@ -4,10 +4,10 @@ const { RULE_TARGET_INFO } = require('../constants/aws/locationMappings');
 const { createRule, addTargetLambda, addLambdaPermissions } = require('../lib/aws/eventBridgeActions');
 const DB = require('../lib/db/query');
 const queries = require('../lib/db/queries');
-const { modelToEntityTest, entityToJsonTests, entityToJsonTest } = require('../mappers/model-to-entity/test');
-const { modelToEntityTestRun } = require('../mappers/model-to-entity/testRun');
+const { modelToEntityTest, entityToJsonTests, entityToJsonTest } = require('../mappers/test');
+const { modelToEntityTestRun } = require('../mappers/testRun');
 const Tests = require('../entities/Tests');
-const { modelToEntityAssertion } = require('../mappers/model-to-entity/assertion');
+const { modelToEntityAssertion } = require('../mappers/assertion');
 
 const createEventBridgeRule = async (reqBody) => {
   const { test } = reqBody;
@@ -81,7 +81,7 @@ const getTests = async (req, res) => {
   try {
     const tests = new Tests();
     const testsData = await queries.getAllTests();
-    testsData.map((t) => {
+    testsData.forEach((t) => {
       const test = modelToEntityTest(t);
       if (!tests.containsTest(test.id)) {
         tests.addTest(test);

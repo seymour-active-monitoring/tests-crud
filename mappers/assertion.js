@@ -1,4 +1,4 @@
-const Assertion = require('../../entities/Assertion');
+const Assertion = require('../entities/Assertion');
 
 const modelToEntityAssertion = (modelAssertionRow) => new Assertion({
   id: modelAssertionRow.assertion_id,
