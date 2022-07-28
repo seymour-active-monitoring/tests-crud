@@ -114,9 +114,21 @@ const runNow = async (req, res) => {
 const getTestRuns = async (req, res) => {
   try {
     const testId = req.params.id;
-    const data = await DB.getTestsRuns(testId);
-    res.status(200).json(data);
+    const testRunsData = await queries.getTestRuns({ testId });
+    const test = modelToEntityTest(testRunsData[0]);
+    testRunsData.forEach((tr) => {
+      const run = modelToEntityTestRun(tr);
+      if (!test.containsRun(run.id)) {
+        test.addRun(run);
+      }
+      const assertion = modelToEntityAssertion(tr);
+      const assertionRun = test.getRun(assertion.testRunId);
+      assertionRun.addAssertion(assertion);
+    });
+    const testJson = entityToJsonTest(test);
+    res.status(200).json(testJson);
   } catch (err) {
+    res.status(500).send(err);
     console.log('Error: ', err);
   }
 };
@@ -124,7 +136,7 @@ const getTestRuns = async (req, res) => {
 const getTestRun = async (req, res) => {
   try {
     const { runId } = req.params;
-    const testRunData = await queries.getTestRun(runId);
+    const testRunData = await queries.getTestRuns({ runId });
     const test = modelToEntityTest(testRunData[0]);
     const run = modelToEntityTestRun(testRunData[0]);
     test.addRun(run);
