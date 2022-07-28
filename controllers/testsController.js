@@ -1,7 +1,7 @@
 const axios = require('axios');
 const { validationResult } = require('express-validator');
 const { RULE_TARGET_INFO } = require('../constants/aws/locationMappings');
-const { createRule, addTargetLambda, addLambdaPermissions } = require('../lib/aws/eventBridgeActions');
+const { createRule, addTargetLambda, addLambdaPermissions, removeRule, removePermission, removeTarget } = require('../lib/aws/eventBridgeActions');
 const DB = require('../lib/db/query');
 const queries = require('../lib/db/queries');
 const { modelToEntityTest, entityToJsonTests, entityToJsonTest } = require('../mappers/test');
@@ -152,6 +152,32 @@ const getTestRun = async (req, res) => {
   }
 };
 
+const deleteTest = async (req, res) => {
+  try {
+    const testId = req.params.id;
+    const testName = await DB.getTestName(testId);
+    try {
+      await DB.deleteTest(testId);
+    } catch (err) {
+      console.log('Error: ', err);
+      return err;
+    }
+
+    await removePermission({
+      lambdaArn: RULE_TARGET_INFO['test-route-packager'].arn,
+      statementId: `preProcessor-home_${testName}`,
+    });
+    await removeTarget({
+      testName,
+      lambdaName: RULE_TARGET_INFO['test-route-packager'].title,
+    });
+    await removeRule(testName);
+    res.status(200).send('OK');
+  } catch (err) {
+    console.log('Error: ', err);
+  }
+};
+
 exports.runNow = runNow;
 exports.createTest = createTest;
 exports.getScheduledTests = getScheduledTests;
@@ -159,3 +185,4 @@ exports.getTest = getTest;
 exports.getTests = getTests;
 exports.getTestRuns = getTestRuns;
 exports.getTestRun = getTestRun;
+exports.deleteTest = deleteTest;
