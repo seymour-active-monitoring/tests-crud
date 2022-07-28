@@ -19,9 +19,9 @@ INSERT INTO assertions (id, test_id, type, property, comparison_type_id, expecte
   VALUES (100000, 100000, 'statusCode', null, 1, '200'),
          (100001, 100000, 'responseTimeMs', null, 4, '500'),
          (100002, 100001, 'statusCode', null, 1, '201'),
-         (100003, 100001, 'responseTimeMs', null, 4, '600'),
-         (100004, 100001, 'containsProperty', null, 1, 'title'),
-         (100005, 100001, 'containsValue','title', 1, 'my-test-board');
+         (100003, 100001, 'responseTime', null, 4, '600'),
+         (100004, 100001, 'body', null, 1, 'title'),
+         (100005, 100001, 'body','title', 1, 'my-test-board');
          
 INSERT INTO tests_regions (test_id, region_id)
   VALUES (100000, 1),

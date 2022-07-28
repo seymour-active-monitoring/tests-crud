@@ -175,7 +175,6 @@ const getTestRun = async (req, res) => {
   }
 };
 
-
 const deleteTest = async (req, res) => {
   try {
     const testId = req.params.id;
@@ -201,7 +200,7 @@ const deleteTest = async (req, res) => {
     console.log('Error: ', err);
   }
 };
- 
+
 const editTest = async (req, res) => {
   const errors = validationResult(req);
   if (errors.isEmpty()) {
