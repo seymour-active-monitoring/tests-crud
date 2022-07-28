@@ -1,7 +1,7 @@
 const axios = require('axios');
 const { validationResult } = require('express-validator');
 const { RULE_TARGET_INFO } = require('../constants/aws/locationMappings');
-const { createRule, addTargetLambda, addLambdaPermissions } = require('../lib/aws/eventBridgeActions');
+const { createOrEditRule, addTargetLambda, addLambdaPermissions } = require('../lib/aws/eventBridgeActions');
 const DB = require('../lib/db/query');
 const queries = require('../lib/db/queries');
 const { modelToEntityTest, entityToJsonTests, entityToJsonTest } = require('../mappers/test');
@@ -14,7 +14,7 @@ const createEventBridgeRule = async (reqBody) => {
   let targetResponse;
   let permissionsResponse;
   try {
-    const { RuleArn } = await createRule({
+    const { RuleArn } = await createOrEditRule({
       name: `${test.title}`,
       minutesBetweenRuns: test.minutesBetweenRuns,
     });
@@ -44,19 +44,27 @@ const createEventBridgeRule = async (reqBody) => {
   return { targetResponse, permissionsResponse };
 };
 
-const editEventBridgeRule = async (reqBody) => {
-  let targetResponse;
+const editEventBridgeRule = async (testId, reqBody) => {
+  const { test } = reqBody;
+  // let targetResponse;
 
   try {
-    // EB: edit rule name and or minutesBetweenRuns
-    // LAMBDA: edit all other test properties
+    const ebRuleArn = await DB.getEbRuleArn(testId);
+    // EB: edit rule minutesBetweenRuns
+    // note: EB does not allow test name to be edited
+    const { RuleArn } = await createOrEditRule({
+      name: `${test.title}`,
+      minutesBetweenRuns: test.minutesBetweenRuns,
+    });
+    console.log('Existing ARN: ', ebRuleArn);
+    console.log('New EB Arn: ', RuleArn);
 
-    const ebRuleArn = await DB.getEbRuleArn(reqBody);
-    console.log('EB RULE ARN: ', ebRuleArn);
+    // LAMBDA: edit all other test properties
   } catch (err) {
     console.log('Error: ', err);
     return err;
   }
+  // return targetResponse
 };
 
 const createTest = async (req, res) => {
@@ -173,7 +181,7 @@ const editTest = async (req, res) => {
     const testId = req.params.id;
     try {
       await editEventBridgeRule(testId, req.body);
-      res.status(204).send(`Test ${req.body.test.title} updated`);
+      res.status(200).send(`Test ${req.body.test.title} updated`);
     } catch (err) {
       console.log('Error: ', err);
     }
