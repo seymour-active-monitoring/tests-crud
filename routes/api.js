@@ -13,5 +13,6 @@ router.get('/sideload', sideloadController.getSideload);
 router.get('/tests/:testId/runs/:runId', testsController.getTestRun);
 router.post('/tests/:id/run', testsController.runNow);
 router.get('/tests/:id/runs', testsController.getTestRuns);
+router.put('/tests/:id', testsController);
 
 module.exports = router;
