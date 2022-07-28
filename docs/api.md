@@ -599,6 +599,7 @@ no playload
     "name": "first-get-test",
     "method": "get",
     "createdAt": "2022-07-27T04:07:31.632Z",
+    "url": "https://trellific.corkboard.dev/api/boards",
     "runs": [
         {
             "id": 100000,
