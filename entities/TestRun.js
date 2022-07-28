@@ -29,6 +29,10 @@ class TestRun {
     this._completedAt = completedAt;
   }
 
+  containsAssertion(assertionId) {
+    return this._assertions.filter((assertion) => assertion.id === assertionId).length > 0;
+  }
+
   addAssertion(assertion) {
     this._assertions.push(assertion);
   }

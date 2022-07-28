@@ -11,6 +11,14 @@ class Test {
     this._runs = [];
   }
 
+  containsRun(runId) {
+    return this._runs.filter((run) => run.id === runId).length > 0;
+  }
+
+  getRun(runId) {
+    return this._runs.filter((run) => run.id === runId)[0];
+  }
+
   addRun(run) {
     this._runs.push(run);
   }
