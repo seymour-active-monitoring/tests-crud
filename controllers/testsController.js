@@ -45,12 +45,14 @@ const createEventBridgeRule = async (reqBody) => {
 };
 
 const editEventBridgeRule = async (reqBody) => {
-  const { test } = reqBody;
   let targetResponse;
 
   try {
     // EB: edit rule name and or minutesBetweenRuns
     // LAMBDA: edit all other test properties
+
+    const ebRuleArn = await DB.getEbRuleArn(reqBody);
+    console.log('EB RULE ARN: ', ebRuleArn);
   } catch (err) {
     console.log('Error: ', err);
     return err;
@@ -168,8 +170,9 @@ const getTestRun = async (req, res) => {
 const editTest = async (req, res) => {
   const errors = validationResult(req);
   if (errors.isEmpty()) {
+    const testId = req.params.id;
     try {
-      await editEventBridgeRule(req.body);
+      await editEventBridgeRule(testId, req.body);
       res.status(204).send(`Test ${req.body.test.title} updated`);
     } catch (err) {
       console.log('Error: ', err);
