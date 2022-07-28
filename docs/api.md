@@ -456,33 +456,121 @@ no payload
 
 ```json
 {
+    "id": 100001,
     "name": "first-post-test",
-    "method": "POST",
-    "url": "https://trellific.corkboard.dev/api/boards",
-    "createdAt": "2022-07-27T03:07:31.632Z",
-    "updatedAt": null,
+    "method": "post",
+    "createdAt": "2022-07-27T04:07:31.632Z",
     "runs": [
         {
             "id": 100003,
-            "location": "N. Virginia",
-            "responseTimeMs": 0,
-            "assertions": 4,
-            "assertionsPassed": 0,
-            "region": {
-                "id": 1,
-                "flagUrl": "https://countryflagsapi.com/png/usa"
-            }
+            "testId": 100001,
+            "success": true,
+            "completedAt": "2022-07-27T04:07:31.632Z",
+            "regionName": "us-east-1",
+            "regionDisplayName": "N. Virginia",
+            "regionFlagUrl": "https://countryflagsapi.com/png/usa",
+            "responseTime": "645",
+            "responseStatus": "200",
+            "responseBody": {},
+            "responseHeaders": {},
+            "assertions": [
+                {
+                    "id": 100002,
+                    "type": "statusCode",
+                    "property": null,
+                    "comparison": "equalTo",
+                    "expectedValue": "201",
+                    "actualValue": "201",
+                    "success": true
+                },
+                {
+                    "id": 100003,
+                    "type": "responseTimeMs",
+                    "property": null,
+                    "comparison": "lessThan",
+                    "expectedValue": "600",
+                    "actualValue": "598",
+                    "success": true
+                },
+                {
+                    "id": 100004,
+                    "type": "containsProperty",
+                    "property": null,
+                    "comparison": "equalTo",
+                    "expectedValue": "title",
+                    "actualValue": "title",
+                    "success": true
+                },
+                {
+                    "id": 100005,
+                    "type": "containsValue",
+                    "property": "title",
+                    "comparison": "equalTo",
+                    "expectedValue": "my-test-board",
+                    "actualValue": "my-test-board",
+                    "success": true
+                }
+            ]
         },
         {
             "id": 100004,
-            "location": "N. California",
-            "responseTimeMs": null,
-            "assertions": 5,
-            "assertionsPassed": 0,
-            "region": {
-                "id": 3,
-                "flagUrl": "https://countryflagsapi.com/png/usa"
-            }
+            "testId": 100001,
+            "success": null,
+            "completedAt": null,
+            "regionName": "us-west-1",
+            "regionDisplayName": "N. California",
+            "regionFlagUrl": "https://countryflagsapi.com/png/usa",
+            "responseTime": "645",
+            "responseStatus": "200",
+            "responseBody": {},
+            "responseHeaders": {},
+            "assertions": [
+                {
+                    "id": 100002,
+                    "type": "statusCode",
+                    "property": null,
+                    "comparison": "equalTo",
+                    "expectedValue": "201",
+                    "actualValue": "201",
+                    "success": true
+                },
+                {
+                    "id": 100003,
+                    "type": "responseTimeMs",
+                    "property": null,
+                    "comparison": "lessThan",
+                    "expectedValue": "600",
+                    "actualValue": "329",
+                    "success": true
+                },
+                {
+                    "id": 100004,
+                    "type": "containsProperty",
+                    "property": null,
+                    "comparison": "equalTo",
+                    "expectedValue": "title",
+                    "actualValue": "title",
+                    "success": true
+                },
+                {
+                    "id": 100005,
+                    "type": "containsValue",
+                    "property": "title",
+                    "comparison": "equalTo",
+                    "expectedValue": "my-test-board",
+                    "actualValue": "my-test-board",
+                    "success": true
+                },
+                {
+                    "id": 100004,
+                    "type": "containsProperty",
+                    "property": null,
+                    "comparison": "equalTo",
+                    "expectedValue": "title",
+                    "actualValue": null,
+                    "success": true
+                }
+            ]
         }
     ]
 }
