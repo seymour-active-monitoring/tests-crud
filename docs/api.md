@@ -134,21 +134,21 @@ The tests are returned in JSON format with a 200 response status code.
             "createdAt": "2022-07-28T04:31:38.157Z",
             "runs": [
                 {
-                    "id": 14,
+                    "id": 847,
                     "testId": 14,
                     "success": true,
                     "createdAt": "2022-07-28T04:33:47.514Z",
                     "assertions": []
                 },
                 {
-                    "id": 14,
+                    "id": 846,
                     "testId": 14,
                     "success": false,
                     "createdAt": "2022-07-28T04:33:47.238Z",
                     "assertions": []
                 },
                 {
-                    "id": 14,
+                    "id": 845,
                     "testId": 14,
                     "success": false,
                     "createdAt": "2022-07-28T04:33:00.915Z",
@@ -163,21 +163,14 @@ The tests are returned in JSON format with a 200 response status code.
             "createdAt": "2022-07-27T04:07:31.632Z",
             "runs": [
                 {
-                    "id": 100000,
+                    "id": 840,
                     "testId": 100000,
                     "success": false,
                     "createdAt": "2022-07-28T04:20:39.445Z",
                     "assertions": []
                 },
                 {
-                    "id": 100000,
-                    "testId": 100000,
-                    "success": true,
-                    "createdAt": "2022-07-27T04:07:31.632Z",
-                    "assertions": []
-                },
-                {
-                    "id": 100000,
+                    "id": 100001,
                     "testId": 100000,
                     "success": true,
                     "createdAt": "2022-07-27T04:07:31.632Z",
@@ -199,16 +192,16 @@ The tests are returned in JSON format with a 200 response status code.
             "createdAt": "2022-07-27T04:07:31.632Z",
             "runs": [
                 {
-                    "id": 100001,
+                    "id": 100004,
                     "testId": 100001,
-                    "success": true,
+                    "success": null,
                     "createdAt": "2022-07-27T04:07:31.632Z",
                     "assertions": []
                 },
                 {
-                    "id": 100001,
+                    "id": 100003,
                     "testId": 100001,
-                    "success": null,
+                    "success": true,
                     "createdAt": "2022-07-27T04:07:31.632Z",
                     "assertions": []
                 }
@@ -533,6 +526,7 @@ no playload
             "responseHeaders": {},
             "assertions": [
                 {
+                    "id": 100000,
                     "type": "statusCode",
                     "property": null,
                     "comparison": "equalTo",
@@ -541,6 +535,7 @@ no playload
                     "success": true
                 },
                 {
+                    "id": 100001,
                     "type": "responseTimeMs",
                     "property": null,
                     "comparison": "lessThan",
