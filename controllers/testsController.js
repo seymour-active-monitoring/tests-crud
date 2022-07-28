@@ -34,14 +34,27 @@ const createEventBridgeRule = async (reqBody) => {
 
     try {
       await DB.addNewTest(ruleName, RuleArn, test);
-    } catch (e) {
-      throw new Error('Something went wrong with the database operation. Please try again');
+    } catch (err) {
+      throw new Error('Error: ', err);
     }
   } catch (err) {
     console.log('Error: ', err);
     return err;
   }
   return { targetResponse, permissionsResponse };
+};
+
+const editEventBridgeRule = async (reqBody) => {
+  const { test } = reqBody;
+  let targetResponse;
+
+  try {
+    // EB: edit rule name and or minutesBetweenRuns
+    // LAMBDA: edit all other test properties
+  } catch (err) {
+    console.log('Error: ', err);
+    return err;
+  }
 };
 
 const createTest = async (req, res) => {
@@ -156,7 +169,7 @@ const editTest = async (req, res) => {
   const errors = validationResult(req);
   if (errors.isEmpty()) {
     try {
-      // await createEventBridgeRule(req.body);
+      await editEventBridgeRule(req.body);
       res.status(204).send(`Test ${req.body.test.title} updated`);
     } catch (err) {
       console.log('Error: ', err);
