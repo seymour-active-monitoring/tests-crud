@@ -124,7 +124,7 @@ const getTestRuns = async (req, res) => {
 const getTestRun = async (req, res) => {
   try {
     const { runId } = req.params;
-    const testRunData = await queries.getTestRun(runId);
+    const testRunData = await queries.getTestRuns({ runId });
     const test = modelToEntityTest(testRunData[0]);
     const run = modelToEntityTestRun(testRunData[0]);
     test.addRun(run);
