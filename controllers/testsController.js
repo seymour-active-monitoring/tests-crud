@@ -1,7 +1,7 @@
 const axios = require('axios');
 const { validationResult } = require('express-validator');
 const { RULE_TARGET_INFO } = require('../constants/aws/locationMappings');
-const { createOrEditRule, addTargetLambda, addLambdaPermissions } = require('../lib/aws/eventBridgeActions');
+const { eventBridgePutRule, addTargetLambda, addLambdaPermissions } = require('../lib/aws/eventBridgeActions');
 const DB = require('../lib/db/query');
 const queries = require('../lib/db/queries');
 const { modelToEntityTest, entityToJsonTests, entityToJsonTest } = require('../mappers/test');
@@ -9,12 +9,13 @@ const { modelToEntityTestRun } = require('../mappers/testRun');
 const Tests = require('../entities/Tests');
 const { modelToEntityAssertion } = require('../mappers/assertion');
 
-const createEventBridgeRule = async (reqBody) => {
+const createOrEditEbRule = async (reqBody, operationType) => {
   const { test } = reqBody;
   let targetResponse;
   let permissionsResponse;
+
   try {
-    const { RuleArn } = await createOrEditRule({
+    const { RuleArn } = await eventBridgePutRule({
       name: `${test.title}`,
       minutesBetweenRuns: test.minutesBetweenRuns,
     });
@@ -33,7 +34,11 @@ const createEventBridgeRule = async (reqBody) => {
     });
 
     try {
-      await DB.addNewTest(ruleName, RuleArn, test);
+      if (operationType === 'create') {
+        await DB.addNewTest(ruleName, RuleArn, test);
+      } else {
+        await DB.editTest(ruleName, RuleArn, test);
+      }
     } catch (err) {
       throw new Error('Error: ', err);
     }
@@ -44,35 +49,26 @@ const createEventBridgeRule = async (reqBody) => {
   return { targetResponse, permissionsResponse };
 };
 
-const editEventBridgeRule = async (testId, reqBody) => {
-  const { test } = reqBody;
-  // let targetResponse;
-
-  try {
-    const ebRuleArn = await DB.getEbRuleArn(testId);
-    // EB: edit rule minutesBetweenRuns
-    // note: EB does not allow test name to be edited
-    const { RuleArn } = await createOrEditRule({
-      name: `${test.title}`,
-      minutesBetweenRuns: test.minutesBetweenRuns,
-    });
-    console.log('Existing ARN: ', ebRuleArn);
-    console.log('New EB Arn: ', RuleArn);
-
-    // LAMBDA: edit all other test properties
-  } catch (err) {
-    console.log('Error: ', err);
-    return err;
-  }
-  // return targetResponse
-};
-
 const createTest = async (req, res) => {
   const errors = validationResult(req);
   if (errors.isEmpty()) {
     try {
-      await createEventBridgeRule(req.body);
+      await createOrEditEbRule(req.body, 'create');
       res.status(201).send(`Test ${req.body.test.title} created`);
+    } catch (err) {
+      console.log('Error: ', err);
+    }
+  } else {
+    res.status(400).json({ errors: errors.array() });
+  }
+};
+
+const editTest = async (req, res) => {
+  const errors = validationResult(req);
+  if (errors.isEmpty()) {
+    try {
+      await createOrEditEbRule(req.body, 'edit');
+      res.status(200).send(`Test ${req.body.test.title} updated`);
     } catch (err) {
       console.log('Error: ', err);
     }
@@ -172,21 +168,6 @@ const getTestRun = async (req, res) => {
   } catch (err) {
     res.status(500).send(err);
     console.log('Error: ', err);
-  }
-};
-
-const editTest = async (req, res) => {
-  const errors = validationResult(req);
-  if (errors.isEmpty()) {
-    const testId = req.params.id;
-    try {
-      await editEventBridgeRule(testId, req.body);
-      res.status(200).send(`Test ${req.body.test.title} updated`);
-    } catch (err) {
-      console.log('Error: ', err);
-    }
-  } else {
-    res.status(400).json({ errors: errors.array() });
   }
 };
 
