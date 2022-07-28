@@ -12,6 +12,7 @@ const modelToEntityAssertion = (modelAssertionRow) => new Assertion({
 });
 
 const entityToJsonAssertion = (assertion) => ({
+  id: assertion.id,
   type: assertion.type,
   property: assertion.property,
   comparison: assertion.comparison,

@@ -16,6 +16,7 @@ const entityToJsonTest = (entityTest) => ({
   minutesBetweenRuns: entityTest.minutesBetweenRuns,
   method: entityTest.method,
   createdAt: entityTest.createdAt,
+  url: entityTest.url,
   runs: entityTest.runs.map((run) => entityToJsonTestRun(run)),
 });
 
