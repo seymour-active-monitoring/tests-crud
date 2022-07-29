@@ -35,6 +35,9 @@
     + [1.6.1. Expected payload](#161-expected-payload)
     + [1.6.2. Successful response](#162-successful-response)
       - [1.6.2.1 Example response](#1621-example-response)
+  * [1.7.0. DELETE /api/tests/:testId](#170-delete--api-tests--testid-runs)
+    + [1.7.1. Expected payload](#171-expected-payload)
+    + [1.7.2. Successful response](#172-successful-response)
 
 <!-- /TOC -->
 <!-- generated using: https://ecotrust-canada.github.io/markdown-toc/ -->
@@ -637,3 +640,16 @@ no playload
     ]
 }
 ```
+## 1.7.0. DELETE /api/tests/:testId
+
+Delete a single test by id
+
+### 1.6.1. Expected payload
+
+no playload
+
+### 1.6.2. Successful response 
+
+200
+
+
