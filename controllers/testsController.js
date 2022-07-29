@@ -65,6 +65,35 @@ const createTest = async (req, res) => {
   }
 };
 
+const editEventBridgeRule = async (reqBody) => {
+  const { test } = reqBody;
+  let targetResponse;
+  try {
+    const { RuleArn } = await putTestRule({
+      name: `${test.title}`,
+      minutesBetweenRuns: test.minutesBetweenRuns,
+    });
+    const ruleName = RuleArn.split('/').slice(-1)[0];
+
+    targetResponse = await addTargetLambda({
+      ruleName,
+      lambdaArn: RULE_TARGET_INFO['test-route-packager'].arn,
+      lambdaName: RULE_TARGET_INFO['test-route-packager'].title,
+      inputJSON: JSON.stringify(reqBody),
+    });
+
+    try {
+      await DB.editTest(ruleName, RuleArn, test);
+    } catch (err) {
+      throw new Error('Error: ', err);
+    }
+  } catch (err) {
+    console.log('Error: ', err);
+    return err;
+  }
+  return { targetResponse };
+};
+
 const editTest = async (req, res) => {
   const errors = validationResult(req);
   if (errors.isEmpty()) {
