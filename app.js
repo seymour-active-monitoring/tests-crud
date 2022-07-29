@@ -1,6 +1,6 @@
 const express = require('express');
 const cors = require('cors');
-const { getDummyData } = require('./lib/db/query');
+const path = require('path');
 const routes = require('./routes/api');
 require('dotenv').config();
 
@@ -10,17 +10,13 @@ const app = express();
 app.use(express.json());
 
 app.use(cors());
-
-app.get('/', async (req, res) => {
-  res.status(200).send('Hello!');
-});
-
-app.get('/dummydata', async (req, res) => {
-  const dummydata = await getDummyData();
-  res.status(200).send(dummydata);
-});
+app.use(express.static(path.join(__dirname, 'build')));
 
 app.use('/api', routes);
+
+app.get('*', (req, res) => {
+  res.sendFile(path.join(`${__dirname}/build/index.html`));
+});
 
 app.listen(PORT, (err) => {
   if (err) console.log(err);

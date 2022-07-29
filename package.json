@@ -7,7 +7,8 @@
     "start": "node app.js",
     "dev": "nodemon app.js",
     "zip": "zip -r tests-crud.zip ./",
-    "lint": "./node_modules/.bin/eslint ."
+    "lint": "./node_modules/.bin/eslint .",
+    "build:ui": "rm -rf build && cd ../tests-ui/ && npm run build && cp -r build ../tests-crud"
   },
   "engines": {
     "node": "^16.0.0"
@@ -23,6 +24,7 @@
     "dotenv": "^16.0.1",
     "express": "^4.18.1",
     "express-validator": "^6.14.2",
+    "path": "^0.12.7",
     "pg": "^8.7.3"
   },
   "devDependencies": {
