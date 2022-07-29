@@ -154,7 +154,7 @@ const runNow = async (req, res) => {
   try {
     const testId = req.params.id;
     // this url will need to come from a config file
-    const lambdaURL = 'https://x3a5z6dcrihrt5dzirl3c6lube0wrlys.lambda-url.us-east-1.on.aws/';
+    const lambdaURL = RULE_TARGET_INFO['test-route-packager'].url;
     const data = await DB.getTestBody(testId);
     axios.post(lambdaURL, data);
     res.status(200).send('OK');

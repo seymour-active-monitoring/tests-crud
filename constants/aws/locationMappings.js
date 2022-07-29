@@ -1,6 +1,9 @@
+require('dotenv').config();
+
 module.exports.RULE_TARGET_INFO = {
   'test-route-packager': {
-    arn: 'arn:aws:lambda:us-east-1:082057163641:function:test-route-packager',
-    title: 'test-route-packager',
+    arn: process.env.TEST_ROUTE_PACKAGER_ARN,
+    title: process.env.TEST_ROUTE_PACKAGER_NAME,
+    url: process.env.TEST_ROUTE_PACKAGER_URL,
   },
 };
