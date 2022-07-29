@@ -1,20 +1,24 @@
 const TestRun = require('../entities/TestRun');
 const { entityToJsonAssertion } = require('./assertion');
 
-const modelToEntityTestRun = (testRunData) => new TestRun({
-  id: testRunData.run_id,
-  testId: testRunData.test_id,
-  success: testRunData.run_success,
-  createdAt: testRunData.run_created_at,
-  completedAt: testRunData.run_completed_at,
-  regionName: testRunData.run_region_name,
-  regionDisplayName: testRunData.run_region_display_name,
-  regionFlagUrl: testRunData.run_region_flag_url,
-  responseTime: testRunData.run_response_time,
-  responseStatus: testRunData.run_response_status,
-  responseBody: testRunData.run_response_body,
-  responseHeaders: testRunData.run_response_headers,
-});
+const modelToEntityTestRun = (testRunData) => {
+  if (testRunData.run_id) {
+    return new TestRun({
+      id: testRunData.run_id,
+      testId: testRunData.test_id,
+      success: testRunData.run_success,
+      createdAt: testRunData.run_created_at,
+      completedAt: testRunData.run_completed_at,
+      regionName: testRunData.run_region_name,
+      regionDisplayName: testRunData.run_region_display_name,
+      regionFlagUrl: testRunData.run_region_flag_url,
+      responseTime: testRunData.run_response_time,
+      responseStatus: testRunData.run_response_status,
+      responseBody: testRunData.run_response_body,
+      responseHeaders: testRunData.run_response_headers,
+    });
+  }
+};
 
 const entityToJsonTestRun = (testRunEntity) => ({
   id: testRunEntity.id,

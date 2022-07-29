@@ -137,8 +137,10 @@ const getTests = async (req, res) => {
         tests.addTest(test);
       }
       const testRun = modelToEntityTestRun(t);
-      const testRunTest = tests.getTest(testRun.testId);
-      testRunTest.addRun(testRun);
+      if (testRun) {
+        const testRunTest = tests.getTest(testRun.testId);
+        testRunTest.addRun(testRun);
+      }
     });
     const testsJson = entityToJsonTests(tests);
     res.status(200).json(testsJson);
