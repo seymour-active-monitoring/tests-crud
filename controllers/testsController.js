@@ -15,6 +15,7 @@ const { modelToEntityTest, entityToJsonTests, entityToJsonTest } = require('../m
 const { modelToEntityTestRun } = require('../mappers/testRun');
 const Tests = require('../entities/Tests');
 const { modelToEntityAssertion } = require('../mappers/assertion');
+const { comparisonIdToType } = require('../utils/helpers');
 
 const createEventBridgeRule = async (reqBody) => {
   const { test } = reqBody;
@@ -38,12 +39,6 @@ const createEventBridgeRule = async (reqBody) => {
       lambdaArn: RULE_TARGET_INFO['test-route-packager'].arn,
       ruleArn: RuleArn,
     });
-
-    try {
-      await DB.addNewTest(ruleName, RuleArn, test);
-    } catch (err) {
-      throw new Error('Error: ', err);
-    }
   } catch (err) {
     console.log('Error: ', err);
     return err;
@@ -51,10 +46,30 @@ const createEventBridgeRule = async (reqBody) => {
   return { targetResponse, permissionsResponse };
 };
 
+const assignAssertionIds = (requestAssertions, dbAssertions) => {
+  const dbAssertionsLookup = {};
+  dbAssertions.forEach((a) => {
+    const assertionKey = `${a.type}-${a.property ? a.property : ''}-${comparisonIdToType(a.comparison_type_id)}-${a.expected_value}}`;
+    dbAssertionsLookup[assertionKey] = a;
+  });
+
+  requestAssertions.forEach((a) => {
+    const assertionKey = `${a.type}-${a.property ? a.property : ''}-${a.comparison}-${a.target}}`;
+    const assertionId = dbAssertionsLookup[assertionKey].id;
+    a.id = assertionId;
+  });
+};
+
 const createTest = async (req, res) => {
   const errors = validationResult(req);
   if (errors.isEmpty()) {
     try {
+      const { test } = req.body;
+      const { id: testId } = await queries.addNewTest(test);
+      test.id = testId;
+      const assertionsData = await queries.addTestAssertions(testId, test.httpRequest.assertions);
+      assignAssertionIds(test.httpRequest.assertions, assertionsData);
+      await queries.addTestAlerts(testId, test.alertChannels);
       await createEventBridgeRule(req.body);
       res.status(201).send(`Test ${req.body.test.title} created`);
     } catch (err) {
