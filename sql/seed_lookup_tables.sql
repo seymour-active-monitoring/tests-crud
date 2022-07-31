@@ -2,7 +2,7 @@ INSERT INTO assertion_types (id, name, display_name, supported)
   VALUES (1, 'responseTime', 'Response time', true),
          (2, 'statusCode', 'Status code', true),
          (3, 'body', 'Body', true),
-         (4, 'headers', 'Headers', true);
+         (4, 'header', 'Header', true);
 
 INSERT INTO http_methods (id, name, display_name, supported)
   VALUES (1, 'get', 'GET', true),
