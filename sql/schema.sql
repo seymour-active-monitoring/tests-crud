@@ -137,6 +137,7 @@ CREATE TABLE assertions (
     REFERENCES comparison_types (id)
     ON DELETE CASCADE,
   expected_value text,
+  active BOOLEAN NOT NULL DEFAULT TRUE,
   created_at TIMESTAMP NOT NULL DEFAULT NOW(),
   updated_at TIMESTAMP
 ); 
