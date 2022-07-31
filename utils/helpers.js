@@ -72,6 +72,17 @@ const formatRuns = (runs, assertionResults) => {
   return testRuns;
 };
 
+const httpMethodToId = (method) => {
+  return {
+    get: 1,
+    post: 2,
+    put: 3,
+    delete: 4,
+    patch: 5,
+    head: 6,
+  }[method];
+};
+
 const comparisonTypeToId = (type) => {
   return {
     equalTo: 1,
@@ -119,5 +130,6 @@ module.exports.toCamelCase = toCamelCase;
 module.exports.toDash = toDash;
 module.exports.formatAssertions = formatAssertions;
 module.exports.formatRuns = formatRuns;
+module.exports.httpMethodToId = httpMethodToId;
 module.exports.comparisonTypeToId = comparisonTypeToId;
 module.exports.comparisonIdToType = comparisonIdToType;

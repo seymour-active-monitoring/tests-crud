@@ -35,9 +35,14 @@
     + [1.6.1. Expected payload](#161-expected-payload)
     + [1.6.2. Successful response](#162-successful-response)
       - [1.6.2.1 Example response](#1621-example-response)
-  * [1.7.0. DELETE /api/tests/:testId](#170-delete--api-tests--testid-runs)
-    + [1.7.1. Expected payload](#171-expected-payload)
-    + [1.7.2. Successful response](#172-successful-response)
+  * [1.7.0. DELETE /api/tests/:testId](#170-delete--api-tests--testid)
+    + [1.6.1. Expected payload](#161-expected-payload-1)
+    + [1.6.2. Successful response](#162-successful-response-1)
+  * [1.7. PUT /api/tests/:id](#17-put--api-tests--id)
+    + [1.7.1. Expected Payload](#171-expected-payload)
+    + [1.7.2. Successful Response](#172-successful-response)
+      - [1.7.2.1. Example Response](#1721-example-response)
+      - [1.7.3 Forwarded Payload](#173-forwarded-payload)
 
 <!-- /TOC -->
 <!-- generated using: https://ecotrust-canada.github.io/markdown-toc/ -->
@@ -52,49 +57,52 @@ Creates a synthetic test
 
 ```json
 {
-  "test": {
-    "title": "New-UI-test",
-    "locations": [
-        "us-east-1",
-        "us-west-1",
-        "ca-central-1",
-        "eu-north-1"
-    ],
-    "minutesBetweenRuns": "1",
-    "type": "api",
-    "httpRequest": {
-      "method": "get",
-      "url": "https://trellific.corkboard.dev/api/boards",
-      "headers": {},
-      "body": {},
-      "assertions": [
-      {
-        "type": "responseTime",
-        "property": "",
-        "comparison": "lessThan",
-        "target": "500"
-      },
-      {
-        "type": "statusCode",
-        "property": "",
-        "comparison": "equalTo",
-        "target": "200"
-      },
-      {
-        "type": "header",
-        "property": "access-control-allow-origin",
-        "comparison": "equalTo",
-        "target": "*"
-      },
-      {
-        "type": "body",
-        "property": "",
-        "comparison": "contains",
-        "target": "_id"
-      }
-    ]
+    "test": {
+        "title": "0731-t2",
+        "locations": [
+            "us-east-1"
+        ],
+        "minutesBetweenRuns": "60",
+        "type": "api",
+        "httpRequest": {
+            "method": "get",
+            "url": "https://trellific.corkboard.dev/api/boards",
+            "headers": {
+                "Content-Type": "application/json"
+            },
+            "body": {
+                "board": {
+                    "title": "0731-t3 board"
+                }
+            },
+            "assertions": [
+                {
+                    "type": "responseTime",
+                    "property": "",
+                    "comparison": "lessThan",
+                    "target": "500"
+                },
+                {
+                    "type": "statusCode",
+                    "property": "",
+                    "comparison": "equalTo",
+                    "target": "200"
+                },
+                {
+                    "type": "header",
+                    "property": "access-control-allow-origin",
+                    "comparison": "equalTo",
+                    "target": "*"
+                },
+                {
+                    "type": "body",
+                    "property": "",
+                    "comparison": "contains",
+                    "target": "_id"
+                }
+            ]
+        }
     }
-  }
 }
 ```
 
@@ -110,7 +118,7 @@ Test my-new-test created
 
 #### 1.1.3 Forwarded Payload
 
-The payload received from the client (refer to 1.1.1) is forwarded to EventBridge for use as the "Input to Target" JSON without modification.
+The payload received from the client (refer to 1.1.1) is forwarded to EventBridge for use as the "Input to Target" JSON largely without modification (ids are added for the test and assertions).
 
 
 ## 1.2. GET /api/tests
@@ -652,4 +660,82 @@ no playload
 
 200
 
+## 1.7. PUT /api/tests/:id
 
+Edits a test configuration
+
+### 1.7.1. Expected Payload
+
+```json
+{
+    "test": {
+        "title": "0731-t6",
+        "locations": [
+            "us-east-1"
+        ],
+        "minutesBetweenRuns": "5",
+        "type": "api",
+        "httpRequest": {
+            "method": "get",
+            "url": "https://trellific.corkboard.dev/api/boards",
+            "headers": {
+                "Content-Type": "application/json"
+            },
+            "body": {
+                "board": {
+                    "title": "0731-t3 board (edit 1)"
+                }
+            },
+            "assertions": [
+                {
+                    "type": "responseTime",
+                    "property": "",
+                    "comparison": "lessThan",
+                    "target": "500"
+                },
+                {
+                    "type": "statusCode",
+                    "property": "",
+                    "comparison": "equalTo",
+                    "target": "200"
+                },
+                {
+                    "type": "header",
+                    "property": "access-control-allow-origin",
+                    "comparison": "equalTo",
+                    "target": "*"
+                },
+                {
+                    "type": "body",
+                    "property": "",
+                    "comparison": "contains",
+                    "target": "_id"
+                }
+            ]
+        },
+        "alertChannels": [
+            {
+                "id": "94db2374-a765-4f93-9d3b-114fabfa21f0",
+                "type": "discord",
+                "destination": "https://discord.com/api/webhooks/999824136513798254/-tZUo-kvKnBFJB9b0htqMu2zgaWA2CA_da1h8O3H6AgLYP_E4FpOe6sczmuqc9vpJ703",
+                "alertsOnRecovery": false,
+                "alertsOnFailure": true
+            }
+        ]
+    }
+}
+```
+
+### 1.7.2. Successful Response
+
+The new test is returned in JSON format with a 200 response status code.
+
+#### 1.7.2.1. Example Response
+
+```text
+Test my-updated-test updated
+```
+
+#### 1.7.3 Forwarded Payload
+
+The payload received from the client (refer to 1.1.1) is forwarded to EventBridge for use as the "Input to Target" JSON largely without modification (ids are added for the test and assertions).
