@@ -101,7 +101,27 @@ Creates a synthetic test
                     "target": "_id"
                 }
             ]
-        }
+        },
+        "alertChannels": [
+          {
+            "type": "slack",
+            "destination": "https://hooks.slack.com/services/...",
+            "alertsOnRecovery": false,
+            "alertsOnFailure": true
+          },
+          {
+            "type": "email",
+            "destination": "name@domain.com",
+            "alertsOnRecovery": false,
+            "alertsOnFailure": true
+          },
+          {
+              "type": "discord",
+              "destination": "https://discord.com/api/webhooks/...",
+              "alertsOnRecovery": false,
+              "alertsOnFailure": true
+          }
+        ]
     }
 }
 ```
