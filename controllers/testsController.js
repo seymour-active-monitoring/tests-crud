@@ -4,9 +4,7 @@ const { RULE_TARGET_INFO } = require('../constants/aws/locationMappings');
 const {
   putTestRule,
   addTargetLambda,
-  addLambdaPermissions,
   removeRule,
-  removePermission,
   removeTarget,
 } = require('../lib/aws/eventBridgeActions');
 const DB = require('../lib/db/query');
@@ -33,11 +31,6 @@ const createEventBridgeRule = async (reqBody) => {
       lambdaArn: RULE_TARGET_INFO['test-route-packager'].arn,
       lambdaName: RULE_TARGET_INFO['test-route-packager'].title,
       inputJSON: JSON.stringify(reqBody),
-    });
-
-    permissionsResponse = await addLambdaPermissions({
-      lambdaArn: RULE_TARGET_INFO['test-route-packager'].arn,
-      ruleArn: RuleArn,
     });
   } catch (err) {
     console.log('Error: ', err);
@@ -233,10 +226,6 @@ const deleteTest = async (req, res) => {
       return err;
     }
 
-    await removePermission({
-      lambdaArn: RULE_TARGET_INFO['test-route-packager'].arn,
-      statementId: `preProcessor-home_${testName}`,
-    });
     await removeTarget({
       testName,
       lambdaName: RULE_TARGET_INFO['test-route-packager'].title,
