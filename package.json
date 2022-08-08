@@ -16,7 +16,6 @@
   "license": "ISC",
   "dependencies": {
     "@aws-sdk/client-eventbridge": "^3.121.0",
-    "@aws-sdk/client-lambda": "^3.130.0",
     "aws-sdk": "^2.1169.0",
     "axios": "^0.27.2",
     "cors": "^2.8.5",
