@@ -118,15 +118,6 @@ const editTest = async (req, res) => {
   }
 };
 
-// const getScheduledTests = async (req, res) => {
-//   try {
-//     const data = await queries.getTests();
-//     res.json({ tests: data });
-//   } catch (err) {
-//     console.log('Error: ', err);
-//   }
-// };
-
 const getTest = async (req, res) => {
   try {
     const testId = req.params.id;
