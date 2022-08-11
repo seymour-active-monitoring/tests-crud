@@ -42,12 +42,12 @@ const createEventBridgeRule = async (reqBody) => {
 const assignAssertionIds = (requestAssertions, dbAssertions) => {
   const dbAssertionsLookup = {};
   dbAssertions.forEach((a) => {
-    const assertionKey = `${a.type}-${a.property ? a.property : ''}-${comparisonIdToType(a.comparison_type_id)}-${a.expected_value}}`;
+    const assertionKey = `${a.type}-${a.property ? a.property : ''}-${comparisonIdToType(a.comparison_type_id)}-${a.expected_value ? a.expected_value : ''}}`;
     dbAssertionsLookup[assertionKey] = a;
   });
 
   requestAssertions.forEach((a) => {
-    const assertionKey = `${a.type}-${a.property ? a.property : ''}-${a.comparison}-${a.target}}`;
+    const assertionKey = `${a.type}-${a.property ? a.property : ''}-${a.comparison}-${a.target ? a.target : ''}}`;
     const assertionId = dbAssertionsLookup[assertionKey].id;
     a.id = assertionId;
   });
