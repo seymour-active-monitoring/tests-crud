@@ -7,7 +7,6 @@ const {
   removeRule,
   removeTarget,
 } = require('../lib/aws/eventBridgeActions');
-// const DB = require('../lib/db/query');
 const queries = require('../lib/db/queries');
 const { modelToEntityTest, entityToJsonTests, entityToJsonTest } = require('../mappers/test');
 const { modelToEntityTestRun } = require('../mappers/testRun');
@@ -124,7 +123,7 @@ const editTest = async (req, res) => {
 const getTest = async (req, res) => {
   try {
     const testId = req.params.id;
-    const data = await queries.getTest(testId);
+    const data = await queries.getTestBody(testId);
     res.json(data);
   } catch (err) {
     console.log('Error: ', err);
