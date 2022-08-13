@@ -63,6 +63,7 @@ const createTest = async (req, res) => {
       const assertionsData = await queries.addTestAssertions(testId, test.httpRequest.assertions);
       assignAssertionIds(test.httpRequest.assertions, assertionsData);
       await queries.addTestAlerts(testId, test.alertChannels);
+      await queries.addTestRegions(testId, test.locations);
       await createEventBridgeRule(req.body);
       res.status(201).send(`Test ${req.body.test.title} created`);
     } catch (err) {
@@ -108,6 +109,8 @@ const editTest = async (req, res) => {
       assignAssertionIds(test.httpRequest.assertions, assertionsData);
       await queries.deleteTestAlerts(testId);
       await queries.addTestAlerts(testId, test.alertChannels);
+      await queries.deleteTestRegions(testId);
+      await queries.addTestRegions(testId, test.locations);
       await editEventBridgeRule(req.body);
       res.status(200).send(`Test ${req.body.test.title} updated`);
     } catch (err) {

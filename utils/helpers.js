@@ -54,6 +54,35 @@ const comparisonIdToType = (id) => {
   }[id];
 };
 
+const regionNameToId = (awsRegionName) => {
+  return {
+    'us-east-1': 1,
+    'us-east-2': 2,
+    'us-west-1': 3,
+    'us-west-2': 4,
+    'ca-central-1': 5,
+    'sa-east-1': 6,
+    'eu-north-1': 7,
+    'eu-west-3': 8,
+    'eu-west-2': 9,
+    'eu-west-1': 10,
+    'eu-central-1': 11,
+    'eu-south-1': 12,
+    'me-south-1': 13,
+    'af-south-1': 14,
+    'ap-southeast-1': 15,
+    'ap-northeast-1': 16,
+    'ap-northeast-3': 17,
+    'ap-east-1': 18,
+    'ap-southeast-2': 19,
+    'ap-southeast-3': 20,
+    'ap-northeast-2': 21,
+    'ap-south-1': 22,
+
+  }[awsRegionName];
+};
+
 module.exports.httpMethodToId = httpMethodToId;
 module.exports.comparisonTypeToId = comparisonTypeToId;
 module.exports.comparisonIdToType = comparisonIdToType;
+module.exports.regionNameToId = regionNameToId;
