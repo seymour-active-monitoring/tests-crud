@@ -6,6 +6,8 @@ This repository contains the code for Seymour's backend service. It provides API
 - triggering a test run on-demand ("run now")
 - retrieve side-load data for the UI
 
+Refer to the the [docs](/docs/api.md) for detailed information on each endpoint.
+
 The backend service also utilizes the AWS SDK to configure EventBridge rules.
 
 # Deployment
