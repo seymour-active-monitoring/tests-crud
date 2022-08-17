@@ -4,7 +4,7 @@ This repository contains the code for Seymour's backend service. It provides API
 - create/ read/ update/ delete operations for test configurations
 - create and read operations for test run data
 - triggering a test run on-demand ("run now")
-- retrieve side-load data for the UI
+- retrieve lookup data for the UI
 
 Refer to the the [docs](/docs/api.md) for detailed information on each endpoint.
 
